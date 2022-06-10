@@ -14,13 +14,16 @@ import { StudentItem } from './StudentItem';
 
 interface Props {
   students: Student[];
+  onRemoveStudent: (id: string) => void;
 }
 
 export const StudentsList = (props: Props) => {
   return (
     <div>
       {
-        props.students.map(it => <StudentItem student={ it }/>)
+        props.students.map(it => <StudentItem student={ it }
+                                              onRemoveStudent={ props.onRemoveStudent
+                                              }/>)
       }
     </div>
   );

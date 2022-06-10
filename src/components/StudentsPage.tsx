@@ -13,15 +13,17 @@ import { StudentsList }        from './StudentsList';
 import { useEffect, useState } from 'react';
 import { Student }             from '../domain/Entities';
 import axios                   from 'axios';
-import { Spinner }             from '@blueprintjs/core';
+import { Button, Spinner }     from '@blueprintjs/core';
+import { CreateStudentDialog } from './dialogs/CreateStudentDialog';
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: 'http://localhost:8080',
   timeout: 1000,
   headers: { 'X-Custom-Header': 'foobar' }
 });
 
 export const StudentsPage = () => {
+  const [createStudentVisible, setCreateStudentVisible] = useState(false);
   const [students, setStudents] = useState<Student[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,8 +44,20 @@ export const StudentsPage = () => {
   return (
     <div>
       {
-        isLoading ? <Spinner/> : <StudentsList students={ students }/>
+        isLoading ? <Spinner/> :
+        <StudentsList students={ students } onRemoveStudent={ id => {
+          setStudents(students.filter(it => it.id !== id));
+        }
+        }/>
       }
+      <Button icon="plus" onClick={ () => setCreateStudentVisible(true) }>
+        Aggiungi studente
+      </Button>
+      {
+        createStudentVisible &&
+        <CreateStudentDialog isVisible={ createStudentVisible }
+                             onClose={ () => setCreateStudentVisible(false) }
+                             onCreate={ it => {console.log(it);} }/> }
     </div>
   );
 };

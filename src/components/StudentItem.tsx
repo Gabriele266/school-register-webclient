@@ -11,9 +11,11 @@
 
 import { Student }        from '../domain/Entities';
 import { Button, Intent } from '@blueprintjs/core';
+import { instance }       from './StudentsPage';
 
 interface Props {
   student: Student;
+  onRemoveStudent: (id: string) => void;
 }
 
 export const StudentItem = (props: Props) => {
@@ -29,7 +31,10 @@ export const StudentItem = (props: Props) => {
       }</div>
       <div>
         <Button icon="trash" minimal intent={ Intent.DANGER } onClick={ () => {
-          console.log('Mi hai premuto ', props.student.name);
+          instance.delete(`/students/${ props.student.id }`).then(response => {
+            console.log(response);
+            props.onRemoveStudent(props.student.id);
+          });
         } }/>
       </div>
     </div>
