@@ -1,19 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+/*
+ * Copyright (c) 2022. Revo Digital 
+ * ---
+ * Author: gabriele
+ * File: index.tsx
+ * Project: school-register-webclient 
+ * Committed last: 2022/5/26 @ 1638
+ * ---
+ * Description:
+ */
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import './style/index.css';
+import 'normalize.css/normalize.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/popover2/lib/css/blueprint-popover2.css';
+import '@blueprintjs/select/lib/css/blueprint-select.css';
+import '@blueprintjs/table/lib/css/table.css';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import ReactDOM         from 'react-dom';
+import { StudentsPage } from './components/StudentsPage';
+
+const students = [
+  {
+    name: 'Gabriele',
+    surname: 'Cavallo',
+    birthDate: 1653578458
+  },
+  {
+    name: 'Giovanni',
+    surname: 'Paolo',
+    birthDate: 1653578458
+  }
+];
+
+ReactDOM.render(<StudentsPage/>,
+  document.querySelector('#root'));

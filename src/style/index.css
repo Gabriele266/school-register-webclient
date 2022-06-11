@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) 2021-2021. Datafood srl
+ * Developed by Revo Digital - revodigital.it
+ * ---
+ * Author: leonardoviada
+ * File: index.css
+ * Project: mle-client
+ * Committed last: 2021/11/8 @ 1558
+ * ---
+ */
+
+@import '~normalize.css/normalize.css';
+@import '~@blueprintjs/core/lib/css/blueprint.css';
+@import '~@blueprintjs/popover2/lib/css/blueprint-popover2.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind screens;
+@tailwind utilities;
+
+
+.mle-form-row {
+    @apply flex flex-row gap-x-3 justify-start grid-cols-2
+}
+
+.mle-form-submit {
+    @apply flex flex-row justify-end
+}
+
+.mle-project-card {
+    @apply p-0
+}
+
+.mle-project-card-side-bar {
+    @apply float-right w-10 bg-gray-300 bg-opacity-20 h-full rounded-r-sm p-0
+}
+
+.mle-project-card-side-btns {
+    @apply flex flex-col mt-2 max-w-min mx-auto p-0
+}
+
+.mle-center-both-axes-parent {
+    @apply flex justify-center h-screen
+}
+
+.mle-center-both-axes-child {
+    @apply self-center
+}
+
+.mle-info-heading {
+    @apply uppercase mb-2 text-xs
+}
+
+.mle-side-panel-wrapper {
+    @apply p-2 text-xs
+}
+
+.mle-project-config-tab {
+    @apply w-full overflow-auto p-1
+}
