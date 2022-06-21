@@ -12,6 +12,9 @@
 import { Student }        from '../domain/Entities';
 import { Button, Intent } from '@blueprintjs/core';
 import { instance }       from './StudentsPage';
+import {CreateStudentDialog} from "./dialogs/CreateStudentDialog";
+import {useState} from "react";
+import {ModifyStudentDialog} from "./dialogs/ModifyStudentDialog";
 
 interface Props {
     student: Student;
@@ -19,17 +22,27 @@ interface Props {
 }
 
 export const StudentItem = (props: Props) => {
+    const [modifyStudentVisible, setModifyStudentVisible] = useState(false);
+
     return (
-        <div className="flex justify-between w-1/2 bg-bpgray-300 p-2 text-white">
+        <div className="flex justify-between w-1/2 bg-blue-200 p-2 text-white">
             <div>
                 {
                     props.student.name + ' ' + props.student.surname
                 }
             </div>
             <div>{
-                (new Date(props.student.birthDate * 1000)).getFullYear()
+                (new Date(props.student.birthDate)).getFullYear()
             }</div>
             <div>
+                <Button icon="edit" onClick={ () => setModifyStudentVisible(true) }/>
+                {
+                    modifyStudentVisible &&
+                    <ModifyStudentDialog student={ props.student }
+                                         isVisible={ modifyStudentVisible }
+                                         onClose={ () => setModifyStudentVisible(false) }
+                                         onModify={ it => {console.log(it);} }/> }
+
                 <Button icon="trash" minimal intent={ Intent.DANGER } onClick={ () => {
                     instance.delete(`/students/${ props.student.id }`).then(response => {
                         console.log(response);
