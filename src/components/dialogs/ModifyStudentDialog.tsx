@@ -23,7 +23,7 @@ export const ModifyStudentDialog = (props: Props) => {
     });
     const [name, setName] = useState(props.student.name);
     const [surname, setSurname] = useState(props.student.surname);
-    const [birthDate, setBirthDate] = useState(new Date(props.student.birthDate));
+    const [birthDate, setBirthDate] = useState(props.student.birthDate);
     const [tel, setTel] = useState(props.student.tel);
     const [email, setEmail] = useState(props.student.email);
     let [inputDate, setInputDate] = useState(msToTime(props.student.birthDate));
@@ -36,6 +36,9 @@ export const ModifyStudentDialog = (props: Props) => {
 
         return `${y}-${m < 10 ? `0${m}` : m}-${d < 10 ? `0${d}` : d}`
     }
+    function timeToMs(time: Date): number {
+        return time.getTime();
+    }
 
     return (
       <Dialog isOpen={ props.isVisible } title="Modifica studente"
@@ -45,14 +48,13 @@ export const ModifyStudentDialog = (props: Props) => {
                   <FormGroup label="Nome" labelFor="name-input">
                       <InputGroup id="name-input" placeholder={ name }
                                   onChange={ event => {
-                                      //console.log(msToTime( props.student.birthDate ));
                                       setName(event.target.value);
                                   } }/>
                   </FormGroup>
               </div>
               <div>
                   <FormGroup label="Cognome" labelFor="surname-input">
-                      <InputGroup id="surname-input" placeholder={ surname }
+                      <InputGroup id="surname-input" value={ surname }
                                   onChange={ event => {
                                       setSurname(event.target.value);
                                   } }/>
@@ -65,13 +67,13 @@ export const ModifyStudentDialog = (props: Props) => {
                              min="1900-01-01" max="2022-06-13"
                              onChange={ event => {
                                  setInputDate(event.target.value);
-                                 setBirthDate(new Date(event.target.value));
+                                 setBirthDate(timeToMs(new Date(event.target.value)));
                              } }/>
                   </FormGroup>
               </div>
               <div>
                   <FormGroup label="Telefono" labelFor="tel-input">
-                      <InputGroup id="tel-input" placeholder={ tel }
+                      <InputGroup id="tel-input" value={ tel }
                                   onChange={ event => {
                                       setTel(event.target.value);
                                   } }/>
@@ -79,7 +81,7 @@ export const ModifyStudentDialog = (props: Props) => {
               </div>
               <div>
                   <FormGroup label="Email" labelFor="email-input">
-                      <InputGroup id="email-input" placeholder={ email }
+                      <InputGroup id="email-input" value={ email }
                                   onChange={ event => {
                                       setEmail(event.target.value);
                                   } }/>
@@ -88,17 +90,9 @@ export const ModifyStudentDialog = (props: Props) => {
               <div className="flex justify-end space-x-2">
                   <Button onClick={ props.onClose }>Chiudi</Button>
                   <Button intent={ Intent.PRIMARY } icon="edit" onClick={ () => {
-                    //props.onModify({})
-                      const student = {
-                          name: name,
-                          surname: surname,
-                          email: email,
-                          birthDate: birthDate.getTime()/1000,
-                          tel: tel,
-                          id: ''
-                      }
-                    instance.post(`/students/update`, student).then(response => {
-                        console.log('student added' + student.id);
+                      props.student = { name, surname, email, birthDate, tel } as Student;
+                      instance.post(`/students/update`, props.student).then(response => {
+
                     })
                   } }>
                       Modifica

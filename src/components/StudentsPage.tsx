@@ -57,7 +57,7 @@ export const StudentsPage = () => {
             createStudentVisible &&
             <CreateStudentDialog isVisible={ createStudentVisible }
                                  onClose={ () => setCreateStudentVisible(false) }
-                                 onCreate={ it => {console.log(it);} }/> }
+                                 /> }
       </div>
   );
 };
