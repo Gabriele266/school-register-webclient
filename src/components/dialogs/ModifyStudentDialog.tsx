@@ -18,9 +18,7 @@ interface Props {
 }
 
 export const ModifyStudentDialog = (props: Props) => {
-    const student = instance.get(`/students/${ props.student.id }`).then(response => {
-        console.log(response);
-    });
+
     const [name, setName] = useState(props.student.name);
     const [surname, setSurname] = useState(props.student.surname);
     const [birthDate, setBirthDate] = useState(props.student.birthDate);
@@ -46,7 +44,7 @@ export const ModifyStudentDialog = (props: Props) => {
           <div className={ Classes.DIALOG_BODY }>
               <div>
                   <FormGroup label="Nome" labelFor="name-input">
-                      <InputGroup id="name-input" placeholder={ name }
+                      <InputGroup id="name-input" value={ name }
                                   onChange={ event => {
                                       setName(event.target.value);
                                   } }/>
@@ -63,7 +61,7 @@ export const ModifyStudentDialog = (props: Props) => {
               <div>
                   <FormGroup label="Anno di nascita" labelFor="birthDate-input">
                       <input type="date" id="start" name="trip-start"
-                             value={inputDate}
+                             value={ inputDate }
                              min="1900-01-01" max="2022-06-13"
                              onChange={ event => {
                                  setInputDate(event.target.value);
@@ -90,9 +88,10 @@ export const ModifyStudentDialog = (props: Props) => {
               <div className="flex justify-end space-x-2">
                   <Button onClick={ props.onClose }>Chiudi</Button>
                   <Button intent={ Intent.PRIMARY } icon="edit" onClick={ () => {
-                      props.student = { name, surname, email, birthDate, tel } as Student;
-                      instance.post(`/students/update`, props.student).then(response => {
-
+                      props.onClose();
+                      const student = { id: props.student.id, name, surname, email, birthDate, tel };
+                      instance.post(`/students/update`, student).then(response => {
+                        console.log(student);
                     })
                   } }>
                       Modifica

@@ -9,7 +9,6 @@
  * Description:
  */
 
-import { Student }  from '../../domain/Entities';
 import {
     Button,
     Classes,
@@ -20,7 +19,6 @@ import {
 }                   from '@blueprintjs/core';
 import { useState } from 'react';
 import {instance} from "../StudentsPage";
-import axios from "axios";
 
 /*export const instance = axios.create({
     baseURL: 'http://localhost:8080',
@@ -96,6 +94,7 @@ export const CreateStudentDialog = (props: Props) => {
                 <div className="flex justify-end space-x-2">
                     <Button onClick={ props.onClose }>Chiudi</Button>
                     <Button intent={ Intent.PRIMARY } icon="add" onClick={ () => {
+                        props.onClose();
                         const student = { name, surname, email, birthDate, tel };
                         instance.post(`/students`, student).then(response => {
                             const id = response.data?.id;
