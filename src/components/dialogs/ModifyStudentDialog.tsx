@@ -34,8 +34,17 @@ export const ModifyStudentDialog = (props: Props) => {
 
         return `${y}-${m < 10 ? `0${m}` : m}-${d < 10 ? `0${d}` : d}`
     }
+
     function timeToMs(time: Date): number {
         return time.getTime();
+    }
+
+    const handleButtonModifyStudent = () => {
+        props.onClose();
+        const student = { id: props.student.id, name, surname, email, birthDate, tel };
+        instance.post(`/students/update`, student).then(response => {
+            console.log(student);
+        });
     }
 
     return (
@@ -87,13 +96,7 @@ export const ModifyStudentDialog = (props: Props) => {
               </div>
               <div className="flex justify-end space-x-2">
                   <Button onClick={ props.onClose }>Chiudi</Button>
-                  <Button intent={ Intent.PRIMARY } icon="edit" onClick={ () => {
-                      props.onClose();
-                      const student = { id: props.student.id, name, surname, email, birthDate, tel };
-                      instance.post(`/students/update`, student).then(response => {
-                        console.log(student);
-                    })
-                  } }>
+                  <Button intent={ Intent.PRIMARY } icon="edit" onClick={ handleButtonModifyStudent }>
                       Modifica
                   </Button>
               </div>

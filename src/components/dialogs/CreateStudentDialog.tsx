@@ -43,6 +43,15 @@ export const CreateStudentDialog = (props: Props) => {
         return time.getTime();
     }
 
+    const handleButtonAddStudent = () => {
+        props.onClose();
+        const student = { name, surname, email, birthDate, tel };
+        instance.post(`/students`, student).then(response => {
+            const id = response.data?.id;
+            console.log('student added with id of ' + id);
+        });
+    }
+
     return (
         <Dialog isOpen={ props.isVisible } title="Creazione studente"
                 onClose={ props.onClose } className="h-69 w-69">
@@ -93,14 +102,7 @@ export const CreateStudentDialog = (props: Props) => {
                 </div>
                 <div className="flex justify-end space-x-2">
                     <Button onClick={ props.onClose }>Chiudi</Button>
-                    <Button intent={ Intent.PRIMARY } icon="add" onClick={ () => {
-                        props.onClose();
-                        const student = { name, surname, email, birthDate, tel };
-                        instance.post(`/students`, student).then(response => {
-                            const id = response.data?.id;
-                            console.log('student added with id of ' + id);
-                        });
-                    } }>
+                    <Button intent={ Intent.PRIMARY } icon="add" onClick={ handleButtonAddStudent }>
                         Aggiungi
                     </Button>
                 </div>

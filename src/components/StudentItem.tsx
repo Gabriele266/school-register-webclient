@@ -12,7 +12,6 @@
 import { Student }        from '../domain/Entities';
 import { Button, Intent } from '@blueprintjs/core';
 import { instance }       from './StudentsPage';
-import {CreateStudentDialog} from "./dialogs/CreateStudentDialog";
 import {useState} from "react";
 import {ModifyStudentDialog} from "./dialogs/ModifyStudentDialog";
 
@@ -21,7 +20,16 @@ interface Props {
     onRemoveStudent: (id: string) => void;
 }
 
+
+
 export const StudentItem = (props: Props) => {
+    const handleButtonDeleteStudent = () => {
+        instance.delete(`/students/${ props.student.id }`).then(response => {
+            console.log(response);
+            props.onRemoveStudent(props.student.id);
+        });
+    }
+
     const [modifyStudentVisible, setModifyStudentVisible] = useState(false);
 
     return (
@@ -43,12 +51,7 @@ export const StudentItem = (props: Props) => {
                                          onClose={ () => setModifyStudentVisible(false) }
                                          onModify={ it => {console.log(it);} }/> }
 
-                <Button icon="trash" minimal intent={ Intent.DANGER } onClick={ () => {
-                    instance.delete(`/students/${ props.student.id }`).then(response => {
-                        console.log(response);
-                        props.onRemoveStudent(props.student.id);
-                    });
-                } }/>
+                <Button icon="trash" minimal intent={ Intent.DANGER } onClick={ handleButtonDeleteStudent }/>
             </div>
         </div>
     );
