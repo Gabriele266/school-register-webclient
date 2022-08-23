@@ -27,18 +27,21 @@ export const StudentsPage = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  useEffect( () => {
+    const effectStudent = async () => {
+      const response = await instance.get('/students');
+
+      console.log(response.data); //anche qua dovrei mettere 'await' ?
+      setStudents(response.data);
+      setIsLoading(false);
+
+      return response;
+    }
+    effectStudent();
+
     setIsLoading(true);
-    instance.get('/students').then(response => {
 
-      setTimeout(() => {
-        console.log(response.data);
-        setStudents(response.data);
-        setIsLoading(false);
-      }, 1000);
-    });
 
-    console.log('Ciao');
   }, [setStudents, setIsLoading]);
 
   return (

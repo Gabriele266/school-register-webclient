@@ -39,12 +39,10 @@ export const ModifyStudentDialog = (props: Props) => {
         return time.getTime();
     }
 
-    const handleButtonModifyStudent = () => {
+    const handleButtonModifyStudent = async () => {
         props.onClose();
         const student = { id: props.student.id, name, surname, email, birthDate, tel };
-        instance.post(`/students/update`, student).then(response => {
-            console.log(student);
-        });
+        const response = await instance.post(`/students/update`, student);
     }
 
     return (

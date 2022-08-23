@@ -23,11 +23,9 @@ interface Props {
 
 
 export const StudentItem = (props: Props) => {
-    const handleButtonDeleteStudent = () => {
-        instance.delete(`/students/${ props.student.id }`).then(response => {
-            console.log(response);
-            props.onRemoveStudent(props.student.id);
-        });
+
+    const handleButtonDeleteStudent = async () => {
+        const response = await instance.delete(`/students/${ props.student.id }`);
     }
 
     const [modifyStudentVisible, setModifyStudentVisible] = useState(false);

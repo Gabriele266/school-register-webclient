@@ -43,13 +43,10 @@ export const CreateStudentDialog = (props: Props) => {
         return time.getTime();
     }
 
-    const handleButtonAddStudent = () => {
+    const handleButtonAddStudent = async () => {
         props.onClose();
         const student = { name, surname, email, birthDate, tel };
-        instance.post(`/students`, student).then(response => {
-            const id = response.data?.id;
-            console.log('student added with id of ' + id);
-        });
+        const response = await instance.post(`/students`, student);
     }
 
     return (
