@@ -36,9 +36,11 @@ export const StudentsSection = () => {
                     }
                     }/>
             }
-            <Button icon="plus" onClick={ () => setCreateStudentVisible(true) }>
-                Aggiungi studente
-            </Button>
+            <div className="p-2 flex justify-end">
+                <Button icon="plus" onClick={ () => setCreateStudentVisible(true) }>
+                    Aggiungi studente
+                </Button>
+            </div>
             {
                 createStudentVisible &&
                 <CreateStudentDialog isVisible={ createStudentVisible }

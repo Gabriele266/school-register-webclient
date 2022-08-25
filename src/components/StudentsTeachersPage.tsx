@@ -14,6 +14,7 @@ export const StudentsTeachersPage = () => {
   return (
       <div className="flex flex-row justify-between">
         < StudentsSection />
+          <div className="p-0.5"></div>
         < TeachersSection />
       </div>
   );
