@@ -9,7 +9,7 @@
  * Description:
  */
 
-import { Student }     from '../domain/Entities';
+import { Student }     from '../../domain/Entities';
 import { StudentItem } from './StudentItem';
 
 interface Props {

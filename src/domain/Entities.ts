@@ -17,3 +17,24 @@ export interface Student {
   tel: string;
   email: string;
 }
+
+export interface Teacher {
+  id: string;
+  name: string;
+  surname: string;
+  birthDate: number;
+  tel: string;
+  email: string;
+  address: string;
+  subject: string;
+}
+
+export interface Grade {
+  id: string;
+  studentID: string;
+  teacherID: string;
+  value: number;
+  subject: string;
+  dateTime: number;
+  description: string;
+}

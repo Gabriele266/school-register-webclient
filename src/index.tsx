@@ -17,7 +17,7 @@ import '@blueprintjs/select/lib/css/blueprint-select.css';
 import '@blueprintjs/table/lib/css/table.css';
 
 import ReactDOM         from 'react-dom';
-import { StudentsPage } from './components/StudentsPage';
+import { StudentsTeachersPage } from './components/StudentsTeachersPage';
 
 const students = [
   {
@@ -32,5 +32,13 @@ const students = [
   }
 ];
 
-ReactDOM.render(<StudentsPage/>,
+const teachers = [
+  {
+    name: 'Piero',
+    surname: 'Primo',
+    subject: 'matematica'
+  }
+]
+
+ReactDOM.render(<StudentsTeachersPage/>,
   document.querySelector('#root'));

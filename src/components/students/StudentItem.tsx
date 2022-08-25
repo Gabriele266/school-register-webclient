@@ -9,9 +9,9 @@
  * Description:
  */
 
-import { Student }        from '../domain/Entities';
+import { Student }        from '../../domain/Entities';
 import { Button, Intent } from '@blueprintjs/core';
-import { instance }       from './StudentsPage';
+import { instance }       from '../StudentsTeachersPage';
 import {useState} from "react";
 import {ModifyStudentDialog} from "./dialogs/ModifyStudentDialog";
 
@@ -31,7 +31,7 @@ export const StudentItem = (props: Props) => {
     const [modifyStudentVisible, setModifyStudentVisible] = useState(false);
 
     return (
-        <div className="flex justify-between w-1/2 bg-blue-200 p-2 text-white">
+        <div className="flex justify-between w-full bg-blue-400 p-2 text-white">
             <div>
                 {
                     props.student.name + ' ' + props.student.surname
@@ -54,3 +54,6 @@ export const StudentItem = (props: Props) => {
         </div>
     );
 };
+
+//<Button icon="book" onClick={ () => setDisplayGradesVisible(true) }/>
+//{ }

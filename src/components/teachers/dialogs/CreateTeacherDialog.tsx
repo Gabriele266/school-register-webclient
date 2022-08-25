@@ -1,14 +1,3 @@
-/*
- * Copyright (c) 2022. Revo Digital
- * ---
- * Author: gabriele
- * File: CreateStudentDialog.tsx
- * Project: school-register-webclient
- * Committed last: 2022/6/10 @ 1623
- * ---
- * Description:
- */
-
 import {
     Button,
     Classes,
@@ -18,39 +7,34 @@ import {
     Intent
 }                   from '@blueprintjs/core';
 import { useState } from 'react';
-import {instance} from "../StudentsPage";
+import {instance} from "../../StudentsTeachersPage";
+import {timeToMs} from "../../funtions";
 
-/*export const instance = axios.create({
-    baseURL: 'http://localhost:8080',
-    timeout: 1000,
-    headers: { 'X-Custom-Header': 'foobar' }
-});*/
 
 interface Props {
     isVisible: boolean;
     onClose: () => void;
 }
 
-export const CreateStudentDialog = (props: Props) => {
+export const CreateTeacherDialog = (props: Props) => {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [birthDate, setBirthDate] = useState(1655805765113);
     const [tel, setTel] = useState('');
     const [email, setEmail] = useState('');
-    let [inputDate, setInputDate] = useState("2004-01-13");
+    let [inputDate, setInputDate] = useState("1985-05-21");
+    const [address, setAddress] = useState('');
+    const [subject, setSubject] = useState('');
 
-    function timeToMs(time: Date): number {
-        return time.getTime();
-    }
 
-    const handleButtonAddStudent = async () => {
+    const handleButtonAddTeacher = async () => {
         props.onClose();
-        const student = { name, surname, email, birthDate, tel };
-        const response = await instance.post(`/students`, student);
+        const teacher = { name, surname, email, birthDate, tel, address, subject };
+        const response = await instance.post(`/teachers`, teacher);
     }
 
     return (
-        <Dialog isOpen={ props.isVisible } title="Creazione studente"
+        <Dialog isOpen={ props.isVisible } title="Creazione insegnante"
                 onClose={ props.onClose } className="h-69 w-69">
             <div className={ Classes.DIALOG_BODY }>
                 <div>
@@ -97,9 +81,25 @@ export const CreateStudentDialog = (props: Props) => {
                                     } }/>
                     </FormGroup>
                 </div>
+                <div>
+                    <FormGroup label="Indirizzo" labelFor="address-input">
+                        <InputGroup id="address-input" placeholder=""
+                                    onChange={ event => {
+                                        setAddress(event.target.value);
+                                    } }/>
+                    </FormGroup>
+                </div>
+                <div>
+                    <FormGroup label="Materia" labelFor="subject-input">
+                        <InputGroup id="subject-input" placeholder="italiano"
+                                    onChange={ event => {
+                                        setSubject(event.target.value);
+                                    } }/>
+                    </FormGroup>
+                </div>
                 <div className="flex justify-end space-x-2">
                     <Button onClick={ props.onClose }>Chiudi</Button>
-                    <Button intent={ Intent.PRIMARY } icon="add" onClick={ handleButtonAddStudent }>
+                    <Button intent={ Intent.PRIMARY } icon="add" onClick={ handleButtonAddTeacher }>
                         Aggiungi
                     </Button>
                 </div>
