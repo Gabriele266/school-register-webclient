@@ -8,7 +8,7 @@ interface Props {
 export const GradesList = (props: Props) => {
     return (
         <div>
-            <div className="flex justify-between p-2">
+            <div className="grid grid-cols-4 gap-4 p-2">
                 <div>Materia</div>
                 <div>Voto</div>
                 <div>Insegnante</div>

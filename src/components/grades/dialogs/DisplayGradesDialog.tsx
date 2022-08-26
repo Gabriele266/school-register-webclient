@@ -35,11 +35,10 @@ export const DisplayGradesDialog = (props: Props) => {
     //se non ci sono ancora voti scriverlo
     
     return(
-        <Dialog isOpen={ props.isVisible } title="Visualizza voti"
+        <Dialog isOpen={ props.isVisible } title="Visualizzazione voti"
                 onClose={ props.onClose } className="h-69 w-69">
             <div className={ Classes.DIALOG_BODY }>
-                Ciao { props.student.name }, questi sono i tuoi voti:
-                <div className="flex-1 -p2">
+                <div className="flex-1">
                     {
                         isLoading ? <Spinner/> : <GradesList grades={ grades }/>
                     }

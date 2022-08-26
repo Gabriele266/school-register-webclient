@@ -27,7 +27,7 @@ export const GradeItem = (props: Props) => {
     //mettere una axios get request dei voti per student
 
     return (
-        <div className="flex justify-between w-full p-2 text-black">
+        <div className="grid grid-cols-4 gap-4 p-2 text-black">
             <div>{ props.grade.subject }</div>
             <div>{ checkInsufficientGrade() }</div>
             <div>{ teacherName }</div>
