@@ -8,7 +8,6 @@ import {
 }                   from '@blueprintjs/core';
 import { useState } from 'react';
 import {instance} from "../../StudentsTeachersPage";
-import {timeToMs} from "../../funtions";
 
 
 interface Props {
@@ -19,18 +18,17 @@ interface Props {
 export const CreateTeacherDialog = (props: Props) => {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
-    const [birthDate, setBirthDate] = useState(1655805765113);
     const [tel, setTel] = useState('');
     const [email, setEmail] = useState('');
-    let [inputDate, setInputDate] = useState("1985-05-21");
     const [address, setAddress] = useState('');
     const [subject, setSubject] = useState('');
 
 
     const handleButtonAddTeacher = async () => {
         props.onClose();
-        const teacher = { name, surname, email, birthDate, tel, address, subject };
+        const teacher = [{ name, surname, email, tel, address, subject }];  //provare senza lista
         const response = await instance.post(`/teachers`, teacher);
+        console.log(response.data);
     }
 
     return (
@@ -51,18 +49,6 @@ export const CreateTeacherDialog = (props: Props) => {
                                     onChange={ event => {
                                         setSurname(event.target.value);
                                     } }/>
-                    </FormGroup>
-                </div>
-                <div>
-                    <FormGroup label="Anno di nascita" labelFor="birthDate-input">
-                        <input type="date" id="start" name="trip-start"
-                               value={inputDate}
-                               min="1900-01-01" max="2022-06-13"
-                               onChange={ event => {
-                                   setInputDate(event.target.value);
-                                   setBirthDate(timeToMs(new Date(event.target.value)));
-                               } }/>
-
                     </FormGroup>
                 </div>
                 <div>

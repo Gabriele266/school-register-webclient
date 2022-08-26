@@ -12,6 +12,7 @@ interface Props {
 
 
 export const TeacherItem = (props: Props) => {
+    console.log("TeacherID-" + props.teacher.name + ": " +  props.teacher.id);
 
     const handleButtonDeleteTeacher = async () => {
         const response = await instance.delete(`/teachers/${ props.teacher.id }`);

@@ -14,6 +14,7 @@ import { Button, Intent } from '@blueprintjs/core';
 import { instance }       from '../StudentsTeachersPage';
 import {useState} from "react";
 import {ModifyStudentDialog} from "./dialogs/ModifyStudentDialog";
+import {DisplayGradesDialog} from "../grades/dialogs/DisplayGradesDialog";
 
 interface Props {
     student: Student;
@@ -23,12 +24,14 @@ interface Props {
 
 
 export const StudentItem = (props: Props) => {
+    console.log("StudentID-" + props.student.name + ": " + props.student.id);
 
     const handleButtonDeleteStudent = async () => {
         const response = await instance.delete(`/students/${ props.student.id }`);
     }
 
     const [modifyStudentVisible, setModifyStudentVisible] = useState(false);
+    const [displayGradesVisible, setDisplayGradesVisible] = useState(false);
 
     return (
         <div className="flex justify-between w-full bg-blue-400 p-2 text-white">
@@ -41,13 +44,19 @@ export const StudentItem = (props: Props) => {
                 (new Date(props.student.birthDate)).getFullYear()
             }</div>
             <div>
-                <Button icon="edit" onClick={ () => setModifyStudentVisible(true) }/>
-                {
+                <Button icon="book" onClick={ () => setDisplayGradesVisible(true) }/> {
+                    displayGradesVisible &&
+                    <DisplayGradesDialog student={ props.student }
+                                         isVisible={ displayGradesVisible }
+                                         onClose={ () => setDisplayGradesVisible(false) }/>
+                }
+                <Button icon="edit" onClick={ () => setModifyStudentVisible(true) }/> {
                     modifyStudentVisible &&
                     <ModifyStudentDialog student={ props.student }
                                          isVisible={ modifyStudentVisible }
                                          onClose={ () => setModifyStudentVisible(false) }
-                                         onModify={ it => {console.log(it);} }/> }
+                                         onModify={ it => {console.log(it);} }/>
+                }
 
                 <Button icon="trash" minimal intent={ Intent.DANGER } onClick={ handleButtonDeleteStudent }/>
             </div>
@@ -55,5 +64,3 @@ export const StudentItem = (props: Props) => {
     );
 };
 
-//<Button icon="book" onClick={ () => setDisplayGradesVisible(true) }/>
-//{ }

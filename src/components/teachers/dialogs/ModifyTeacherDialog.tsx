@@ -16,10 +16,8 @@ export const ModifyTeacherDialog = (props: Props) => {
 
     const [name, setName] = useState(props.teacher.name);
     const [surname, setSurname] = useState(props.teacher.surname);
-    const [birthDate, setBirthDate] = useState(props.teacher.birthDate);
     const [tel, setTel] = useState(props.teacher.tel);
     const [email, setEmail] = useState(props.teacher.email);
-    let [inputDate, setInputDate] = useState(msToTime(props.teacher.birthDate));
     const [address, setAddress] = useState(props.teacher.address);
     const [subject, setSubject] = useState(props.teacher.subject);
 
@@ -27,12 +25,14 @@ export const ModifyTeacherDialog = (props: Props) => {
 
     const handleButtonModifyTeacher = async () => {
         props.onClose();
-        const teacher = { id: props.teacher.id, name, surname, email, birthDate, tel, address, subject };
-        const response = await instance.post(`/teachers/update`, teacher);
+        //console.log(props.teacher.id);  //corretto
+        const teacher = { id: props.teacher.id, name, surname, email, tel, address, subject };
+        const response = await instance.put(`/teachers`, teacher);
+        console.log(response.data);
     }
 
     return (
-        <Dialog isOpen={ props.isVisible } title="Modifica teachere"
+        <Dialog isOpen={ props.isVisible } title="Modifica insegnante"
                 onClose={ props.onClose } className="h-69 w-69">
             <div className={ Classes.DIALOG_BODY }>
                 <div>
@@ -49,17 +49,6 @@ export const ModifyTeacherDialog = (props: Props) => {
                                     onChange={ event => {
                                         setSurname(event.target.value);
                                     } }/>
-                    </FormGroup>
-                </div>
-                <div>
-                    <FormGroup label="Anno di nascita" labelFor="birthDate-input">
-                        <input type="date" id="start" name="trip-start"
-                               value={ inputDate }
-                               min="1900-01-01" max="2022-06-13"
-                               onChange={ event => {
-                                   setInputDate(event.target.value);
-                                   setBirthDate(timeToMs(new Date(event.target.value)));
-                               } }/>
                     </FormGroup>
                 </div>
                 <div>

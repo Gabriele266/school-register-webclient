@@ -22,7 +22,6 @@ export interface Teacher {
   id: string;
   name: string;
   surname: string;
-  birthDate: number;
   tel: string;
   email: string;
   address: string;
