@@ -2,7 +2,7 @@ import {Button, Classes, Dialog, Spinner} from "@blueprintjs/core";
 import {useEffect, useState} from "react";
 import {instance} from "../../StudentsTeachersPage";
 import {Grade, Student} from "../../../domain/Entities";
-import {GradesList} from "../GradesList";
+import {GradesList} from "./GradesList";
 
 interface Props {
     student: Student;
@@ -10,8 +10,7 @@ interface Props {
     onClose: () => void;
 }
 
-export const DisplayGradesDialog = (props: Props) => {
-    const [createGradeVisible, setCreateGradeVisible] = useState(false);
+export const StudentGradesDialog = (props: Props) => {
     const [grades, setGrades] = useState<Grade[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     

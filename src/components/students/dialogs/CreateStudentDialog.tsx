@@ -19,7 +19,7 @@ import {
 }                   from '@blueprintjs/core';
 import { useState } from 'react';
 import {instance} from "../../StudentsTeachersPage";
-import {timeToMs} from "../../funtions";
+import {timeToMs} from "../../utilities/funtions";
 
 
 interface Props {

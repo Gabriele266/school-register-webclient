@@ -2,7 +2,7 @@ import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from "@blueprint
 import {instance} from "../../StudentsTeachersPage";
 import {Teacher} from "../../../domain/Entities";
 import {useState} from "react";
-import {msToTime, timeToMs} from "../../funtions";
+import {msToTime, timeToMs} from "../../utilities/funtions";
 
 
 interface Props {

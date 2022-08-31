@@ -3,6 +3,8 @@ import { instance } from '../StudentsTeachersPage';
 import {useState} from "react";
 import {Teacher} from "../../domain/Entities";
 import {ModifyTeacherDialog} from "./dialogs/ModifyTeacherDialog";
+import {StudentGradesDialog} from "../grades/studentsGrade/StudentGradesDialog";
+import {TeacherGradesDialog} from "../grades/teachersGrade/TeacherGradesDialog";
 
 interface Props {
     teacher: Teacher;
@@ -19,7 +21,9 @@ export const TeacherItem = (props: Props) => {
     }
 
     const [modifyTeacherVisible, setModifyTeacherVisible] = useState(false);
+    const [teacherGradesVisible, setTeacherGradesVisible] = useState(false);
 
+    //Inserire nello spazio vuoto un button contente i voti visualizzabili dall'insegnante
     return (
         <div className="flex justify-between w-full bg-red-400 p-2 text-white">
             <div>
@@ -29,6 +33,12 @@ export const TeacherItem = (props: Props) => {
             </div>
             <div> { props.teacher.subject }</div>
             <div>
+                <Button icon="book" onClick={ () => setTeacherGradesVisible(true) }/> {
+                teacherGradesVisible &&
+                <TeacherGradesDialog teacher={ props.teacher }
+                                     isVisible={ teacherGradesVisible }
+                                     onClose={ () => setTeacherGradesVisible(false) }/>
+            }
                 <Button icon="edit" onClick={ () => setModifyTeacherVisible(true) }/>
                 {
                     modifyTeacherVisible &&

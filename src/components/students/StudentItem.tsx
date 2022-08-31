@@ -14,7 +14,7 @@ import { Button, Intent } from '@blueprintjs/core';
 import { instance }       from '../StudentsTeachersPage';
 import {useState} from "react";
 import {ModifyStudentDialog} from "./dialogs/ModifyStudentDialog";
-import {DisplayGradesDialog} from "../grades/dialogs/DisplayGradesDialog";
+import {StudentGradesDialog} from "../grades/studentsGrade/StudentGradesDialog";
 
 interface Props {
     student: Student;
@@ -31,7 +31,7 @@ export const StudentItem = (props: Props) => {
     }
 
     const [modifyStudentVisible, setModifyStudentVisible] = useState(false);
-    const [displayGradesVisible, setDisplayGradesVisible] = useState(false);
+    const [studentGradesVisible, setStudentGradesVisible] = useState(false);
 
     return (
         <div className="flex justify-between w-full bg-blue-400 p-2 text-white">
@@ -44,11 +44,11 @@ export const StudentItem = (props: Props) => {
                 (new Date(props.student.birthDate)).getFullYear()
             }</div>
             <div>
-                <Button icon="book" onClick={ () => setDisplayGradesVisible(true) }/> {
-                    displayGradesVisible &&
-                    <DisplayGradesDialog student={ props.student }
-                                         isVisible={ displayGradesVisible }
-                                         onClose={ () => setDisplayGradesVisible(false) }/>
+                <Button icon="book" onClick={ () => setStudentGradesVisible(true) }/> {
+                    studentGradesVisible &&
+                    <StudentGradesDialog student={ props.student }
+                                         isVisible={ studentGradesVisible }
+                                         onClose={ () => setStudentGradesVisible(false) }/>
                 }
                 <Button icon="edit" onClick={ () => setModifyStudentVisible(true) }/> {
                     modifyStudentVisible &&

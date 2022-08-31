@@ -1,6 +1,6 @@
-import {Grade} from "../../domain/Entities";
-import {msToTime} from "../funtions";
-import {instance} from "../StudentsTeachersPage";
+import {Grade} from "../../../domain/Entities";
+import {msToTime} from "../../utilities/funtions";
+import {instance} from "../../StudentsTeachersPage";
 import {useState} from "react";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 //DA FARE GRAFICA VOTI
 
-export const GradeItem = (props: Props) => {
+export const StudentGradeItem = (props: Props) => {
     const checkInsufficientGrade = () => {
         const grade = props.grade.value;
         if(grade < 6) return ( <div className="text-red-700">{ grade }</div>);
