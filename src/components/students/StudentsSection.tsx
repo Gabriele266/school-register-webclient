@@ -24,7 +24,6 @@ export const StudentsSection = () => {
 
         setIsLoading(true);
 
-
     }, [setStudents, setIsLoading]);
 
     return (

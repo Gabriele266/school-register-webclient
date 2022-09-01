@@ -20,7 +20,7 @@ export const StudentGradeItem = (props: Props) => {
     const getTeacherByID = async() => {
         const response = await instance.get(`/teachers/${ props.grade.teacherID }`);
         setTeacherName(response.data.name);
-        console.log(teacherName);
+        //console.log(teacherName);
     }
     getTeacherByID();
     //codice utile

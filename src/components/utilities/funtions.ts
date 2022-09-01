@@ -17,10 +17,10 @@ export function getSubjectGrades(grades: Grade[], subject: string): Grade[] {
     let array = [];
     for (let i = 0; i < grades.length; i++) {
         if (grades[i].subject === subject) {
-            console.log(grades[i].value);
+            //console.log(grades[i].value);
             array.push(grades[i]);
         }
-        else console.log("nothing yet_" + i);
+        //else console.log("nothing yet_" + i);
     }
     return array as Grade[];
 }

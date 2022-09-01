@@ -13,24 +13,25 @@ interface Props {
     onClose: () => void;
 }
 
-export const DisplayGradesDialog = (props: Props) => {
-    const [students, setStudents] = useState<Student[]>([]);
+export const DisplayGradesDialog = (props: Props) => {;
+    const [grades, setGrades] = useState<Grade[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [grades, setGrades] = useState<Grade[]>([]);
-
     useEffect( () => {
+        //viene eseguito ogni volta che si preme il bottone 'occhio' sullo student
         const getStudentGradesBySubject = async () => {
             const response = await instance.get(`/students/${ props.student.id }/grades`);
-            setGrades(response.data);
 
-            const gradesList = getSubjectGrades(grades, props.subject);
+            //se metto const non funziona piu un cazzo
+            let gradesList = getSubjectGrades(response.data, props.subject);
+            //console.log(gradesList)
+            setGrades(gradesList);
 
-            //setGrades(gradesList);
             setIsLoading(false);
             return response;
         }
         getStudentGradesBySubject();
+
         setIsLoading(true);
 
     }, [setGrades, setIsLoading]);
