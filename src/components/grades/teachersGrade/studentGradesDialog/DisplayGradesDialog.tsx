@@ -22,7 +22,7 @@ export const DisplayGradesDialog = (props: Props) => {;
         const getStudentGradesBySubject = async () => {
             const response = await instance.get(`/students/${ props.student.id }/grades`);
 
-            //se metto const non funziona piu un cazzo
+            //se metto const non funziona
             let gradesList = getSubjectGrades(response.data, props.subject);
             //console.log(gradesList)
             setGrades(gradesList);

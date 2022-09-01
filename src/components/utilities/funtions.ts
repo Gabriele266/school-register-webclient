@@ -14,6 +14,7 @@ export function timeToMs(time: Date): number {
 }
 
 export function getSubjectGrades(grades: Grade[], subject: string): Grade[] {
+    //upgradarla alla array.filter()
     let array = [];
     for (let i = 0; i < grades.length; i++) {
         if (grades[i].subject === subject) {

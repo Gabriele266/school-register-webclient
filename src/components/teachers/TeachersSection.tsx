@@ -3,10 +3,9 @@ import {Button, Spinner} from "@blueprintjs/core";
 import {Teacher} from "../../domain/Entities";
 import {instance} from "../StudentsTeachersPage";
 import {TeachersList} from "./TeachersList";
-import {CreateTeacherDialog} from "./dialogs/CreateTeacherDialog";
+import {AddButton} from "../utilities/buttons/AddButton";
 
 export const TeachersSection = () => {
-    const [createTeacherVisible, setCreateTeacherVisible] = useState(false);
     const [teachers, setTeachers] = useState<Teacher[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -14,7 +13,7 @@ export const TeachersSection = () => {
         const effectTeacher = async () => {
             const response = await instance.get('/teachers');
 
-            console.log(response.data); //anche qua dovrei mettere 'await' ?
+            console.log(response.data);
             setTeachers(response.data);
             setIsLoading(false);
 
@@ -36,17 +35,7 @@ export const TeachersSection = () => {
                     }
                     }/>
             }
-            <div className="p-2 flex justify-end">
-                <Button icon="plus" onClick={ () => setCreateTeacherVisible(true) }>
-                    Aggiungi insegnante
-                </Button>
-            </div>
-
-            {
-                createTeacherVisible &&
-                <CreateTeacherDialog isVisible={ createTeacherVisible }
-                                     onClose={ () => setCreateTeacherVisible(false) }
-                /> }
+            <AddButton itemType={ "Teacher" }/>
         </div>
     );
 };

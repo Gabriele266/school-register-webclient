@@ -1,12 +1,11 @@
 import {useEffect, useState} from "react";
 import {instance} from "../StudentsTeachersPage";
 import {Student} from "../../domain/Entities";
-import {Button, Spinner} from "@blueprintjs/core";
+import {Spinner} from "@blueprintjs/core";
 import {StudentsList} from "./StudentsList";
-import {CreateStudentDialog} from "./dialogs/CreateStudentDialog";
+import {AddButton} from "../utilities/buttons/AddButton";
 
 export const StudentsSection = () => {
-    const [createStudentVisible, setCreateStudentVisible] = useState(false);
     const [students, setStudents] = useState<Student[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -14,7 +13,7 @@ export const StudentsSection = () => {
         const effectStudent = async () => {
             const response = await instance.get('/students');
 
-            console.log(response.data); //anche qua dovrei mettere 'await' ?
+            console.log(response.data);
             setStudents(response.data);
             setIsLoading(false);
 
@@ -35,16 +34,7 @@ export const StudentsSection = () => {
                     }
                     }/>
             }
-            <div className="p-2 flex justify-end">
-                <Button icon="plus" onClick={ () => setCreateStudentVisible(true) }>
-                    Aggiungi studente
-                </Button>
-            </div>
-            {
-                createStudentVisible &&
-                <CreateStudentDialog isVisible={ createStudentVisible }
-                                     onClose={ () => setCreateStudentVisible(false) }
-                /> }
+            <AddButton itemType={ "Student"}/>
         </div>
     );
 };
