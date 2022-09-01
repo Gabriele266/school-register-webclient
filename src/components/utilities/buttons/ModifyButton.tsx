@@ -6,7 +6,7 @@ import {ModifyTeacherDialog} from "../../teachers/dialogs/ModifyTeacherDialog";
 
 interface Props {
     item: Student | Teacher;
-    itemType: string;
+    itemType: "Student" | "Teacher";
 }
 
 export const ModifyButton = (props: Props) => {

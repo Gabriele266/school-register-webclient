@@ -5,7 +5,7 @@ import {CreateTeacherDialog} from "../../teachers/dialogs/CreateTeacherDialog";
 import {useState} from "react";
 
 interface Props {
-    itemType: string;
+    itemType: "Student" | "Teacher";
 }
 
 export const AddButton = (props: Props) => {

@@ -35,7 +35,7 @@ export const TeacherGradesDialog = (props: Props) => {
             <div className={ Classes.DIALOG_BODY }>
                 <div className="flex-1">
                     {
-                        isLoading ? <Spinner/> :  <StudentsList2 students={ students } subject={props.teacher.subject}/>
+                        isLoading ? <Spinner/> :  <StudentsList2 students={ students } teacher={ props.teacher }/>
                     }
                 </div>
             </div>

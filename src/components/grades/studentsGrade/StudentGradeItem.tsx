@@ -7,8 +7,6 @@ interface Props {
     grade: Grade;
 }
 
-//DA FARE GRAFICA VOTI
-
 export const StudentGradeItem = (props: Props) => {
     const checkInsufficientGrade = () => {
         const grade = props.grade.value;
@@ -23,8 +21,6 @@ export const StudentGradeItem = (props: Props) => {
         //console.log(teacherName);
     }
     getTeacherByID();
-    //codice utile
-    //mettere una axios get request dei voti per student
 
     return (
         <div className="grid grid-cols-4 gap-4 p-2 text-black">

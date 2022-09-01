@@ -4,7 +4,7 @@ import {Button, Intent} from "@blueprintjs/core";
 
 interface Props {
     item: Student | Teacher;
-    itemType: string;
+    itemType: "Student" | "Teacher";
 }
 
 export const DeleteButton = (props: Props) => {

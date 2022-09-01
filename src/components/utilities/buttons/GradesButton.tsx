@@ -6,7 +6,7 @@ import {TeacherGradesDialog} from "../../grades/teachersGrade/TeacherGradesDialo
 
 interface Props {
     item: Student | Teacher;
-    itemType: string;
+    itemType: "Student" | "Teacher";
 }
 
 export const GradesButton = (props: Props) => {
