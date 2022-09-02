@@ -9,12 +9,12 @@
  * Description:
  */
 
-import {StudentsList} from './StudentsList';
 import {useEffect, useState} from 'react';
 import {Student} from '../domain/Entities';
 import axios from 'axios';
 import {Button, Spinner} from '@blueprintjs/core';
-import {CreateStudentDialog} from './dialogs/CreateStudentDialog';
+import {CreateStudentDialog} from "./students/dialogs/CreateStudentDialog";
+import {StudentItem} from "./utilities/items/StudentItem";
 
 export const instance = axios.create({
   baseURL: 'http://localhost:8080',
@@ -45,19 +45,24 @@ export const StudentsPage = (): JSX.Element => {
     <div>
       {
         isLoading ? <Spinner/> :
-        <StudentsList students={ students } onRemoveStudent={ id => {
-          setStudents(students.filter(it => it.id !== id));
-        }
-        }/>
+            <div>
+              {
+                students.map(it => <StudentItem student={it}
+                                                onRemoveStudent={() => {
+                                                }
+                                                }
+                />)
+              }
+            </div>
       }
       <Button icon="plus" onClick={ () => setCreateStudentVisible(true) }>
         Aggiungi studente
       </Button>
       {
-        createStudentVisible &&
-        <CreateStudentDialog isVisible={ createStudentVisible }
-                             onClose={ () => setCreateStudentVisible(false) }
-                             onCreate={ it => {console.log(it);} }/> }
+          createStudentVisible &&
+          <CreateStudentDialog isVisible={createStudentVisible}
+                               onClose={() => setCreateStudentVisible(false)}
+          />}
     </div>
   );
 };

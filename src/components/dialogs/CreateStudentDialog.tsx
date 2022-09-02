@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2022. Revo Digital
+ * Copyright (c) 2022-2022. Revo Digital
  * ---
- * Author: gabriele
+ * Author: gabrielecavallo
  * File: CreateStudentDialog.tsx
  * Project: school-register-webclient
- * Committed last: 2022/6/10 @ 1623
+ * Committed last: 2022/9/2 @ 1413
  * ---
  * Description:
  */
 
 import {Student} from '../../domain/Entities';
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprintjs/core';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 interface Props {
   isVisible: boolean;
@@ -19,7 +19,7 @@ interface Props {
   onCreate: (student: Student) => void;
 }
 
-export const CreateStudentDialog = (props: Props) => {
+const CreateStudentDialog = (props: Props) => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [birthDate, setBirthDate] = useState(new Date());

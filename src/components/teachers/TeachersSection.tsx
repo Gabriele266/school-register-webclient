@@ -34,8 +34,6 @@ export const TeachersSection = () => {
         effectTeacher();
 
         setIsLoading(true);
-
-
     }, [setTeachers, setIsLoading]);
 
     return (

@@ -1,4 +1,4 @@
-import { Student }     from '../../domain/Entities';
+import {Student} from '../../domain/Entities';
 import {StudentItem} from "../utilities/items/StudentItem";
 
 
@@ -11,9 +11,10 @@ export const StudentsList = (props: Props) => {
   return (
       <div>
         {
-          props.students.map(it => <StudentItem student={ it }
-                                                itemType={ "Student" }
-                                                />)
+          props.students.map(it => <StudentItem student={it}
+                                                actions={[<div>ciao</div>]}
+                                                showOnlyYear
+          />)
         }
       </div>
   );

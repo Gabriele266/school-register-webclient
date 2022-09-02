@@ -9,8 +9,7 @@
  * Description:
  */
 
-import { Student }     from '../domain/Entities';
-import { StudentItem } from './StudentItem';
+import {Student} from '../domain/Entities';
 
 interface Props {
   students: Student[];
@@ -19,12 +18,6 @@ interface Props {
 
 export const StudentsList = (props: Props) => {
   return (
-    <div>
-      {
-        props.students.map(it => <StudentItem student={ it }
-                                              onRemoveStudent={ props.onRemoveStudent
-                                              }/>)
-      }
-    </div>
+
   );
 };

@@ -16,12 +16,13 @@ export const CreateStudentDialog = (props: Props) => {
     const [email, setEmail] = useState('');
     let [inputDate, setInputDate] = useState("2004-01-13");
 
-
+    // TODO: Utilizzo di una useCallback
     const handleButtonAddStudent = async () => {
-        props.onClose();
-        const student = { name, surname, email, birthDate, tel };
+        const student = {name, surname, email, birthDate, tel};
         // TODO: La variabile response non è utilizzata, per tanto non è utile
-        const response = await instance.post(`/students`, student);
+        await instance.post(`/students`, student);
+
+        props.onClose();
     }
 
     return (
@@ -53,7 +54,6 @@ export const CreateStudentDialog = (props: Props) => {
                                    setInputDate(event.target.value);
                                    setBirthDate(timeToMs(new Date(event.target.value)));
                                } }/>
-
                     </FormGroup>
                 </div>
                 <div>

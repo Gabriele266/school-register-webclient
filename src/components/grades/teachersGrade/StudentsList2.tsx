@@ -11,9 +11,10 @@ export const StudentsList2 = (props: Props) => {
     return (
         <div className="p-1">
             {
-                props.students.map(it => <StudentItem student={ it }
-                                                      teacher={ props.teacher }
-                                                      itemType={ "Teacher" }
+                props.students.map(it => <StudentItem student={it}
+                                                      teacher={props.teacher}
+                                                      actions={[]}
+                                                      background="red"
                 />)
             }
         </div>

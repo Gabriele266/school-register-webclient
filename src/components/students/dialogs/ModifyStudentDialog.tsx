@@ -4,11 +4,14 @@ import {useState} from 'react';
 import {instance} from "../../StudentsTeachersPage";
 import {msToTime, timeToMs} from "../../utilities/TsFuntions";
 
-// TODO: Utilizzare un'interfaccia comune per tutte le proprietà 'sempre uguali' dei dialoghi
-interface Props {
-    student: Student;
+export interface BaseDialogProps {
     isVisible: boolean;
     onClose: () => void;
+}
+
+// TODO: Utilizzare un'interfaccia comune per tutte le proprietà 'sempre uguali' dei dialoghi
+interface Props extends BaseDialogProps {
+    student: Student;
     onModify: (student: Student) => void;
 }
 
@@ -26,7 +29,7 @@ export const ModifyStudentDialog = (props: Props) => {
         const student = {id: props.student.id, name, surname, email, birthDate, tel};
 
         // TODO: La variabile response non è utilizzata, per tanto non è utile
-        const response = await instance.post(`/students/update`, student);
+        await instance.post(`/students/update`, student);
     }
 
     return (

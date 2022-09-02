@@ -5,7 +5,7 @@ import {CreateTeacherDialog} from "../../teachers/dialogs/CreateTeacherDialog";
 import {useState} from "react";
 
 interface Props {
-    // TODO: Quando passiamo delle con una serie ristretta di possibili valori usiamo le enumerazioni
+    // TODO: Quando passiamo delle variabili con una serie ristretta di possibili valori usiamo le enumerazioni
     itemType: "Student" | "Teacher";
 }
 
