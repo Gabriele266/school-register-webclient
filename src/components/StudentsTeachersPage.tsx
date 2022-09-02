@@ -1,5 +1,4 @@
-
-import axios                   from 'axios';
+import axios from 'axios';
 import {StudentsSection} from "./students/StudentsSection";
 import {TeachersSection} from "./teachers/TeachersSection";
 
@@ -9,11 +8,12 @@ export const instance = axios.create({
   headers: { 'X-Custom-Header': 'foobar' }
 });
 
+// TODO: Potremmo chiamarla semplicemente HomePage
 export const StudentsTeachersPage = () => {
 
   return (
       <div className="flex flex-row justify-between">
-        < StudentsSection />
+          <StudentsSection/>
           <div className="p-0.5"></div>
         < TeachersSection />
       </div>

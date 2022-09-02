@@ -9,27 +9,27 @@
  * Description:
  */
 
-import { StudentsList }        from './StudentsList';
-import { useEffect, useState } from 'react';
-import { Student }             from '../domain/Entities';
-import axios                   from 'axios';
-import { Button, Spinner }     from '@blueprintjs/core';
-import { CreateStudentDialog } from './dialogs/CreateStudentDialog';
+import {StudentsList} from './StudentsList';
+import {useEffect, useState} from 'react';
+import {Student} from '../domain/Entities';
+import axios from 'axios';
+import {Button, Spinner} from '@blueprintjs/core';
+import {CreateStudentDialog} from './dialogs/CreateStudentDialog';
 
 export const instance = axios.create({
   baseURL: 'http://localhost:8080',
   timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar' }
+  headers: {'X-Custom-Header': 'foobar'}
 });
 
-export const StudentsPage = () => {
+export const StudentsPage = (): JSX.Element => {
   const [createStudentVisible, setCreateStudentVisible] = useState(false);
   const [students, setStudents] = useState<Student[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    instance.get('/students').then(response => {
+    instance.get('/students', {}).then(response => {
 
       setTimeout(() => {
         console.log(response.data);

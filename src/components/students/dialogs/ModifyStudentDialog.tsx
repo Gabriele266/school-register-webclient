@@ -1,16 +1,10 @@
-import { Student } from '../../../domain/Entities';
-import {
-    Button,
-    Classes,
-    Dialog,
-    FormGroup,
-    InputGroup,
-    Intent
-}                   from '@blueprintjs/core';
-import { useState } from 'react';
+import {Student} from '../../../domain/Entities';
+import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprintjs/core';
+import {useState} from 'react';
 import {instance} from "../../StudentsTeachersPage";
 import {msToTime, timeToMs} from "../../utilities/TsFuntions";
 
+// TODO: Utilizzare un'interfaccia comune per tutte le proprietà 'sempre uguali' dei dialoghi
 interface Props {
     student: Student;
     isVisible: boolean;
@@ -19,7 +13,6 @@ interface Props {
 }
 
 export const ModifyStudentDialog = (props: Props) => {
-
     const [name, setName] = useState(props.student.name);
     const [surname, setSurname] = useState(props.student.surname);
     const [birthDate, setBirthDate] = useState(props.student.birthDate);
@@ -27,9 +20,12 @@ export const ModifyStudentDialog = (props: Props) => {
     const [email, setEmail] = useState(props.student.email);
     let [inputDate, setInputDate] = useState(msToTime(props.student.birthDate));
 
+    // TODO: Usare useCallback per migliore gestione dello stato
     const handleButtonModifyStudent = async () => {
         props.onClose();
-        const student = { id: props.student.id, name, surname, email, birthDate, tel };
+        const student = {id: props.student.id, name, surname, email, birthDate, tel};
+
+        // TODO: La variabile response non è utilizzata, per tanto non è utile
         const response = await instance.post(`/students/update`, student);
     }
 

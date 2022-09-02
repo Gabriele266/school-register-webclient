@@ -1,12 +1,5 @@
-import {
-    Button,
-    Classes,
-    Dialog,
-    FormGroup,
-    InputGroup,
-    Intent
-}                   from '@blueprintjs/core';
-import { useState } from 'react';
+import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprintjs/core';
+import {useState} from 'react';
 import {instance} from "../../StudentsTeachersPage";
 import {timeToMs} from "../../utilities/TsFuntions";
 
@@ -27,6 +20,7 @@ export const CreateStudentDialog = (props: Props) => {
     const handleButtonAddStudent = async () => {
         props.onClose();
         const student = { name, surname, email, birthDate, tel };
+        // TODO: La variabile response non è utilizzata, per tanto non è utile
         const response = await instance.post(`/students`, student);
     }
 

@@ -9,6 +9,7 @@ interface Props {
 
 export const DeleteButton = (props: Props) => {
 
+    // TODO: Non mettiamo il funzionamento dentro un bottone.
     const handleButtonDeleteItem = async () => {
         return await instance.delete(`/${props.itemType.toLowerCase() + "s"}/${props.item.id}`);
     }

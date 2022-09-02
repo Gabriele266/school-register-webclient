@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Button, Spinner} from "@blueprintjs/core";
+import {Spinner} from "@blueprintjs/core";
 import {Teacher} from "../../domain/Entities";
 import {instance} from "../StudentsTeachersPage";
 import {TeachersList} from "./TeachersList";
@@ -10,6 +10,18 @@ export const TeachersSection = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect( () => {
+        // TODO: Utilizzare sintassi più clean
+        /*
+        useEffect( () => {
+            (async () => {
+                setIsLoading(true);
+                // Codice qui
+                // ...
+                setIsLoading(false);
+            })();
+        });
+         */
+
         const effectTeacher = async () => {
             const response = await instance.get('/teachers');
 

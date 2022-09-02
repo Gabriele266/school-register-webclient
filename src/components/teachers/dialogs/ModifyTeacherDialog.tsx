@@ -2,9 +2,8 @@ import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from "@blueprint
 import {instance} from "../../StudentsTeachersPage";
 import {Teacher} from "../../../domain/Entities";
 import {useState} from "react";
-import {msToTime, timeToMs} from "../../utilities/TsFuntions";
 
-
+// TODO: Utilizzare un'interfaccia comune per tutte le proprietà 'sempre uguali' dei dialoghi
 interface Props {
     teacher: Teacher;
     isVisible: boolean;
@@ -13,7 +12,6 @@ interface Props {
 }
 
 export const ModifyTeacherDialog = (props: Props) => {
-
     const [name, setName] = useState(props.teacher.name);
     const [surname, setSurname] = useState(props.teacher.surname);
     const [tel, setTel] = useState(props.teacher.tel);
@@ -21,9 +19,8 @@ export const ModifyTeacherDialog = (props: Props) => {
     const [address, setAddress] = useState(props.teacher.address);
     const [subject, setSubject] = useState(props.teacher.subject);
 
-
-
     const handleButtonModifyTeacher = async () => {
+        // TODO: onClose lo chiamiamo dopo che abbiamo finito di fare tutto, altrimenti con elaborazioni lunghe rischia di crashare
         props.onClose();
         //console.log(props.teacher.id);  //corretto
         const teacher = { id: props.teacher.id, name, surname, email, tel, address, subject };

@@ -10,6 +10,7 @@ export const StudentsSection = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect( () => {
+        // TODO: Refactor con sintassi più elegante e semplice
         const effectStudent = async () => {
             const response = await instance.get('/students');
 
@@ -29,12 +30,16 @@ export const StudentsSection = () => {
         <div className="flex-1">
             {
                 isLoading ? <Spinner/> :
-                    <StudentsList students={ students } onRemoveStudent={ id => {
+                    <StudentsList students={students} onRemoveStudent={id => {
                         setStudents(students.filter(it => it.id !== id));
                     }
                     }/>
             }
-            <AddButton itemType={ "Student"}/>
+            {
+                // TODO: Togliere il componente a parte AddButton, è troppo specifico e non ci serve praticamente a nulla.
+                // la sua logica verrà implementata direttamente qua dentro
+            }
+            <AddButton itemType={"Student"}/>
         </div>
     );
 };

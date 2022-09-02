@@ -16,21 +16,11 @@ import '@blueprintjs/popover2/lib/css/blueprint-popover2.css';
 import '@blueprintjs/select/lib/css/blueprint-select.css';
 import '@blueprintjs/table/lib/css/table.css';
 
-import ReactDOM         from 'react-dom';
-import { StudentsTeachersPage } from './components/StudentsTeachersPage';
+import ReactDOM from 'react-dom';
+import {StudentsTeachersPage} from './components/StudentsTeachersPage';
 
-const students = [
-  {
-    name: 'Gabriele',
-    surname: 'Cavallo',
-    birthDate: 1653578458
-  },
-  {
-    name: 'Giovanni',
-    surname: 'Paolo',
-    birthDate: 1653578458
-  }
-];
+const i = [4, 3, 2, 1]
+const s = ['ciao', 'lillo']
 
 const teachers = [
   {
