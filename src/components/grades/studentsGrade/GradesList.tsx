@@ -1,5 +1,5 @@
 import {Grade} from "../../../domain/Entities";
-import {StudentGradeItem} from "./StudentGradeItem";
+import {GradeItem} from "../../utilities/items/GradeItem";
 
 interface Props {
     grades: Grade[];
@@ -8,8 +8,17 @@ interface Props {
 export const GradesList = (props: Props) => {
     return (
         <div>
+            <div className="grid grid-cols-4 gap-2 p-2">
+                <div>Materia</div>
+                <div>Voto</div>
+                <div>Data</div>
+                <div>Descrizione</div>
+                <br/>
+            </div>
             {
-                props.grades.map(it => <StudentGradeItem grade={ it }/>)
+                props.grades.map(it => <GradeItem grade={ it }
+                                                  itemType={ "Student" }
+                />)
             }
         </div>
     );

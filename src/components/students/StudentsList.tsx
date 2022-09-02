@@ -1,5 +1,5 @@
 import { Student }     from '../../domain/Entities';
-import {StudentItem} from "../utilities/StudentItem";
+import {StudentItem} from "../utilities/items/StudentItem";
 
 
 interface Props {

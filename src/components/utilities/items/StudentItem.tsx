@@ -1,9 +1,9 @@
-import {Student, Teacher} from '../../domain/Entities';
-import {GradesButton} from "./buttons/GradesButton";
-import {ModifyButton} from "./buttons/ModifyButton";
-import {DeleteButton} from "./buttons/DeleteButton";
-import {EyeButton} from "./buttons/EyeButton";
-import {msToTime} from "./funtions";
+import {Student, Teacher} from '../../../domain/Entities';
+import {GradesButton} from "../buttons/GradesButton";
+import {ModifyButton} from "../buttons/ModifyButton";
+import {DeleteButton} from "../buttons/DeleteButton";
+import {EyeButton} from "../buttons/EyeButton";
+import {msToTime} from "../TsFuntions";
 
 interface Props {
     student: Student;
@@ -27,7 +27,7 @@ export const StudentItem = (props: Props) => {
                     <ModifyButton item={ props.student } itemType={ "Student" } />
                     <DeleteButton item={ props.student } itemType={ "Student" } />
                 </div>
-            )
+            );
         }
         else return (
             <div>
@@ -42,13 +42,12 @@ export const StudentItem = (props: Props) => {
             <div>{ date() }</div>
             <div>{ buttons() }</div>
         </div>
-    )
+    );
     else return (
         <div className="flex justify-between w-full border border-slate-300 hover:border-indigo-300 p-2 text-black">
             <div>{ props.student.name + ' ' + props.student.surname }</div>
             <div>{ date() }</div>
             <div>{ buttons() }</div>
         </div>
-    )
-
+    );
 };

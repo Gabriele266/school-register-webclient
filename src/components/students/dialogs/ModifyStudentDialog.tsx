@@ -9,7 +9,7 @@ import {
 }                   from '@blueprintjs/core';
 import { useState } from 'react';
 import {instance} from "../../StudentsTeachersPage";
-import {msToTime, timeToMs} from "../../utilities/funtions";
+import {msToTime, timeToMs} from "../../utilities/TsFuntions";
 
 interface Props {
     student: Student;

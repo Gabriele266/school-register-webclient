@@ -1,14 +1,3 @@
-/*
- * Copyright (c) 2022. Revo Digital
- * ---
- * Author: gabriele
- * File: CreateStudentDialog.tsx
- * Project: school-register-webclient
- * Committed last: 2022/6/10 @ 1623
- * ---
- * Description:
- */
-
 import {
     Button,
     Classes,
@@ -19,8 +8,7 @@ import {
 }                   from '@blueprintjs/core';
 import { useState } from 'react';
 import {instance} from "../../StudentsTeachersPage";
-import {timeToMs} from "../../utilities/funtions";
-
+import {timeToMs} from "../../utilities/TsFuntions";
 
 interface Props {
     isVisible: boolean;

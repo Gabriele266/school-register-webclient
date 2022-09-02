@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react";
-import {Grade, Student, Teacher} from "../../../../domain/Entities";
+import {Grade, Student} from "../../../../domain/Entities";
 import {Classes, Dialog, Spinner} from "@blueprintjs/core";
-import {StudentsList2} from "../StudentsList2";
 import {instance} from "../../../StudentsTeachersPage";
-import {getSubjectGrades} from "../../../utilities/funtions";
 import {GradesListForStudent} from "./GradesListForStudent";
+import {getSubjectGrades} from "../../../utilities/TsFuntions";
 
 interface Props {
     student: Student;
