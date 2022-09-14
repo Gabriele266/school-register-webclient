@@ -19,32 +19,12 @@ export const StudentItem = (props: Props) => {
         } else return (msToTime(props.student.birthDate));
     }
 
-    /*
-    const actions = () => {
-        if (props.itemType === "Student") {
-            return (
-                <div className="flex flex-row">
-                    <GradesButton item={ props.student } itemType={ "Student" } />
-                    <ModifyButton item={ props.student } itemType={ "Student" } />
-                    <DeleteButton item={ props.student } itemType={ "Student" } />
-                </div>
-            );
-        }
-        else return (
-            <div>
-                <EyeButton student={ props.student } subject={ props.teacher!.subject } />
-            </div>
-        )
-    }
-    */
-
     return (
         <div onClick={props.onClick} style={{background: props.background}}
              className={props.styleType}>
             <div>{props.showCompleteName ? (props.student.name + ' ' + props.student.surname) : props.student.name}</div>
             <div>{date()}</div>
-            {<div className="flex flex-row">{props.actions} </div>
-            }
+            <div className="flex flex-row">{props.actions} </div>
         </div>
     );
 };
