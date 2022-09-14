@@ -8,6 +8,7 @@ interface Props {
     actions: JSX.Element[];
     showCompleteName?: boolean;
     background?: string;
+    styleType?: string;
     onClick?: () => void;
 }
 
@@ -39,7 +40,7 @@ export const StudentItem = (props: Props) => {
 
     return (
         <div onClick={props.onClick} style={{background: props.background}}
-             className="flex grid grid-cols-3 w-full border border-slate-300 hover:border-indigo-300 p-2 text-black">
+             className={props.styleType}>
             <div>{props.showCompleteName ? (props.student.name + ' ' + props.student.surname) : props.student.name}</div>
             <div>{date()}</div>
             {<div className="flex flex-row">{props.actions} </div>
