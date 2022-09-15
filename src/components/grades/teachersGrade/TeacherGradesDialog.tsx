@@ -1,8 +1,9 @@
 import {Student, Teacher} from "../../../domain/Entities";
 import {useEffect, useState} from "react";
 import {instance} from "../../StudentsTeachersPage";
-import {Classes, Dialog, Spinner} from "@blueprintjs/core";
+import {Button, Classes, Dialog, Spinner} from "@blueprintjs/core";
 import {StudentItem} from "../../utilities/items/StudentItem";
+import {DisplayGradesDialog} from "./studentGradesDialog/DisplayGradesDialog";
 
 interface Props {
     teacher: Teacher;
@@ -13,6 +14,8 @@ interface Props {
 export const TeacherGradesDialog = (props: Props) => {
     const [students, setStudents] = useState<Student[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+
+    const [displayGradesVisible, setDisplayGradesVisible] = useState(false);
 
     useEffect( () => {
         const getStudents = async () => {
@@ -40,7 +43,16 @@ export const TeacherGradesDialog = (props: Props) => {
                                 {
                                     students.map(it => <StudentItem student={it}
                                                                     teacher={props.teacher}
-                                                                    actions={[]}
+                                                                    actions={[
+                                                                        <div>
+                                                                        <Button icon="eye-open" onClick={ () => setDisplayGradesVisible(true) }/> {
+                                                                        displayGradesVisible &&
+                                                                        <DisplayGradesDialog student={ it }
+                                                                                             subject={ props.teacher.subject }
+                                                                                             isVisible={ displayGradesVisible }
+                                                                                             onClose={ () => setDisplayGradesVisible(false) }/>
+                                                                    }
+                                                                    </div>]}
                                                                     styleType="flex justify-between w-full border border-slate-300 hover:border-indigo-300 p-2 text-black"
                                     />)
                                 }

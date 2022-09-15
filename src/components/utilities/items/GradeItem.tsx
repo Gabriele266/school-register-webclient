@@ -11,7 +11,7 @@ interface Props {
 export const GradeItem = (props: Props) => {
     return (
         <div className={props.styleType}>
-            <div>{ props.showSubject ? props.grade.subject : false }</div>
+            <div>{ props.showSubject ? props.grade.subject : false }</div>  //TODO mostrare o no il div
             <div>{ checkInsufficientGrade( props.grade.value ) }</div>
             <div>{ msToTime(props.grade.dateTime) }</div>
             <div>{ props.grade.description }</div>
