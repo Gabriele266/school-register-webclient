@@ -2,7 +2,7 @@ import {Button, Classes, Dialog, Spinner} from "@blueprintjs/core";
 import {useEffect, useState} from "react";
 import {instance} from "../../StudentsTeachersPage";
 import {Grade, Student} from "../../../domain/Entities";
-import {GradesList} from "./GradesList";
+import {GradeItem} from "../../utilities/items/GradeItem";
 
 interface Props {
     student: Student;
@@ -39,7 +39,22 @@ export const StudentGradesDialog = (props: Props) => {
             <div className={ Classes.DIALOG_BODY }>
                 <div className="flex-1">
                     {
-                        isLoading ? <Spinner/> : <GradesList grades={ grades }/>
+                        isLoading ? <Spinner/> :
+                            <div>
+                                <div className="grid grid-cols-4 gap-2 p-2">
+                                    <div>Materia</div>
+                                    <div>Voto</div>
+                                    <div>Data</div>
+                                    <div>Descrizione</div>
+                                    <br/>
+                                </div>
+                                {
+                                    grades.map(it => <GradeItem grade={ it }
+                                                                      showSubject
+                                                                      styleType="grid grid-cols-4 gap-2 p-2 text-black"
+                                    />)
+                                }
+                            </div>
                     }
                 </div>
             </div>

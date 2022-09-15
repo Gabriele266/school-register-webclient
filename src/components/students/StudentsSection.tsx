@@ -28,6 +28,10 @@ export const StudentsSection = () => {
         })();
     });
 
+    /*const handleButtonDelete = async () => {  //TODO non riesco a riferirmi ad 'it' dalla onClick
+            await instance.delete(`/students/${ it.id }`);
+    }*/
+
     return (
         <div className="flex-1">
             {
