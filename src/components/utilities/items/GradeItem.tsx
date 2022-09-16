@@ -1,6 +1,6 @@
 import {Grade} from "../../../domain/Entities";
-import {msToTime} from "../TsFuntions";
-import {checkInsufficientGrade} from "../TsxFunctions";
+import {msToTime} from "../functions/TsFuntions";
+import {checkInsufficientGrade} from "../functions/TsxFunctions";
 
 interface Props {
     grade: Grade;
@@ -9,9 +9,9 @@ interface Props {
 }
 
 export const GradeItem = (props: Props) => {
-    return (
+    return (    // mettere o no il div in showSubject?
         <div className={props.styleType}>
-            <div>{ props.showSubject ? props.grade.subject : false }</div>  //TODO mostrare o no il div
+            { props.showSubject && props.grade.subject }
             <div>{ checkInsufficientGrade( props.grade.value ) }</div>
             <div>{ msToTime(props.grade.dateTime) }</div>
             <div>{ props.grade.description }</div>

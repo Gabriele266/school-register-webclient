@@ -1,15 +1,14 @@
 import {Student} from '../../../domain/Entities';
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprintjs/core';
 import {useState} from 'react';
-import {instance} from "../../StudentsTeachersPage";
-import {msToTime, timeToMs} from "../../utilities/TsFuntions";
+import {instance} from "../../HomePage";
+import {msToTime, timeToMs} from "../../utilities/functions/TsFuntions";
 
 export interface BaseDialogProps {
     isVisible: boolean;
     onClose: () => void;
 }
 
-// TODO: Utilizzare un'interfaccia comune per tutte le proprietà 'sempre uguali' dei dialoghi
 interface Props extends BaseDialogProps {
     student: Student;
     onModify: (student: Student) => void;
@@ -28,7 +27,6 @@ export const ModifyStudentDialog = (props: Props) => {
         props.onClose();
         const student = {id: props.student.id, name, surname, email, birthDate, tel};
 
-        // TODO: La variabile response non è utilizzata, per tanto non è utile
         await instance.post(`/students/update`, student);
     }
 

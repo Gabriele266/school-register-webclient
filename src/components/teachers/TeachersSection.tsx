@@ -1,40 +1,27 @@
 import {useEffect, useState} from "react";
-import {Spinner} from "@blueprintjs/core";
+import {Button, Spinner} from "@blueprintjs/core";
 import {Teacher} from "../../domain/Entities";
-import {instance} from "../StudentsTeachersPage";
+import {instance} from "../HomePage";
 import {TeachersList} from "./TeachersList";
-import {AddButton} from "../utilities/buttons/AddButton";
+import {CreateTeacherDialog} from "./dialogs/CreateTeacherDialog";
 
 export const TeachersSection = () => {
     const [teachers, setTeachers] = useState<Teacher[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const [createTeacherVisible, setCreateTeacherVisible] = useState(false);
+
     useEffect( () => {
-        // TODO: Utilizzare sintassi più clean
-        /*
-        useEffect( () => {
-            (async () => {
-                setIsLoading(true);
-                // Codice qui
-                // ...
-                setIsLoading(false);
-            })();
-        });
-         */
+        (async () => {
+            //setIsLoading(true);   //TODO bug: rimane true per sempre
 
-        const effectTeacher = async () => {
             const response = await instance.get('/teachers');
-
-            console.log(response.data);
             setTeachers(response.data);
+
             setIsLoading(false);
+        })();
+    });
 
-            return response;
-        }
-        effectTeacher();
-
-        setIsLoading(true);
-    }, [setTeachers, setIsLoading]);
 
     return (
         <div className="flex-1">
@@ -45,7 +32,16 @@ export const TeachersSection = () => {
                     }
                     }/>
             }
-            <AddButton itemType={ "Teacher" }/>
+            <div className="p-2 flex justify-end">
+                <Button icon="plus" onClick={ () => setCreateTeacherVisible(true) }>
+                    Aggiungi insegnante
+                </Button>
+            </div>
+            {
+                createTeacherVisible &&
+                <CreateTeacherDialog isVisible={ createTeacherVisible }
+                                     onClose={ () => setCreateTeacherVisible(false) }
+                /> }
         </div>
     );
 };

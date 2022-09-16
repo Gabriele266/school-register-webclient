@@ -1,12 +1,10 @@
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprintjs/core';
 import {useState} from 'react';
-import {instance} from "../../StudentsTeachersPage";
+import {instance} from "../../HomePage";
+import {BaseDialogProps} from "../../students/dialogs/ModifyStudentDialog";
 
-// TODO: Utilizzare un'interfaccia comune per tutte le proprietà 'sempre uguali' dei dialoghi
-interface Props {
-    isVisible: boolean;
-    onClose: () => void;
-}
+
+interface Props extends BaseDialogProps { }
 
 export const CreateTeacherDialog = (props: Props) => {
     const [name, setName] = useState('');
@@ -18,11 +16,11 @@ export const CreateTeacherDialog = (props: Props) => {
 
     // TODO: Usare useCallback
     const handleButtonAddTeacher = async () => {
-        // TODO: onClose lo chiamiamo dopo che abbiamo finito di fare tutto, altrimenti con elaborazioni lunghe rischia di crashare
-        props.onClose();
         const teacher = [{ name, surname, email, tel, address, subject }];  //provare senza lista
         const response = await instance.post(`/teachers`, teacher);
         console.log(response.data);
+
+        props.onClose();    // onClose lo chiamiamo dopo che abbiamo finito di fare tutto, altrimenti con elaborazioni lunghe rischia di crashare
     }
 
     return (

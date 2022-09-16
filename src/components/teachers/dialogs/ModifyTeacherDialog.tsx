@@ -1,5 +1,5 @@
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from "@blueprintjs/core";
-import {instance} from "../../StudentsTeachersPage";
+import {instance} from "../../HomePage";
 import {Teacher} from "../../../domain/Entities";
 import {useState} from "react";
 

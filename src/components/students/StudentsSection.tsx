@@ -1,8 +1,7 @@
 import {useEffect, useState} from "react";
-import {instance} from "../StudentsTeachersPage";
+import {instance} from "../HomePage";
 import {Student} from "../../domain/Entities";
 import {Button, Intent, Spinner} from "@blueprintjs/core";
-import {AddButton} from "../utilities/buttons/AddButton";
 import {StudentItem} from "../utilities/items/StudentItem";
 import {ModifyStudentDialog} from "./dialogs/ModifyStudentDialog";
 import {StudentGradesDialog} from "../grades/studentsGrade/StudentGradesDialog";
@@ -14,7 +13,6 @@ export const StudentsSection = () => {
 
     const [modifyStudentVisible, setModifyStudentVisible] = useState(false);
     const [studentGradesVisible, setStudentGradesVisible] = useState(false);
-
     const [createStudentVisible, setCreateStudentVisible] = useState(false);
 
     useEffect( () => {
@@ -60,7 +58,7 @@ export const StudentsSection = () => {
                                                             </div>]}
                                                             showOnlyYear    //significa true
                                                             showCompleteName
-                                                            styleType="grid grid-cols-3 gap-3 w-full bg-blue-400 p-2 text-white"
+                                                            styleType="flex justify-between gap-3 w-full bg-blue-400 p-2 text-white"
                                                             //TODO bug: la griglia da 3 si presenta da 4 spazi con uno vuoto
                             />)
                         }

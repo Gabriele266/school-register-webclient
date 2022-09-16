@@ -8,8 +8,7 @@ export const instance = axios.create({
   headers: { 'X-Custom-Header': 'foobar' }
 });
 
-// TODO: Potremmo chiamarla semplicemente HomePage
-export const StudentsTeachersPage = () => {
+export const HomePage = () => {
 
   return (
       <div className="flex flex-row justify-between">

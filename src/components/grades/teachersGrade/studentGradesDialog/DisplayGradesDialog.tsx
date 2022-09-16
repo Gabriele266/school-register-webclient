@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {Grade, Student} from "../../../../domain/Entities";
 import {Classes, Dialog, Spinner} from "@blueprintjs/core";
-import {instance} from "../../../StudentsTeachersPage";
-import {getSubjectGrades} from "../../../utilities/TsFuntions";
+import {instance} from "../../../HomePage";
+import {getSubjectGrades} from "../../../utilities/functions/TsFuntions";
 import {GradeItem} from "../../../utilities/items/GradeItem";
 
 interface Props {

@@ -1,6 +1,6 @@
 import {Button, Classes, Dialog, Spinner} from "@blueprintjs/core";
 import {useEffect, useState} from "react";
-import {instance} from "../../StudentsTeachersPage";
+import {instance} from "../../HomePage";
 import {Grade, Student} from "../../../domain/Entities";
 import {GradeItem} from "../../utilities/items/GradeItem";
 

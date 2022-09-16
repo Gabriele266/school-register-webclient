@@ -1,7 +1,7 @@
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprintjs/core';
-import {useState} from 'react';
-import {instance} from "../../StudentsTeachersPage";
-import {timeToMs} from "../../utilities/TsFuntions";
+import {useCallback, useState} from 'react';
+import {instance} from "../../HomePage";
+import {timeToMs} from "../../utilities/functions/TsFuntions";
 
 interface Props {
     isVisible: boolean;
@@ -19,11 +19,20 @@ export const CreateStudentDialog = (props: Props) => {
     // TODO: Utilizzo di una useCallback
     const handleButtonAddStudent = async () => {
         const student = {name, surname, email, birthDate, tel};
-        // TODO: La variabile response non è utilizzata, per tanto non è utile
+
         await instance.post(`/students`, student);
 
         props.onClose();
     }
+
+    const addStudent = useCallback(async (event) => {
+        const student = {name, surname, email, birthDate, tel};
+
+        await instance.post(`/students`, student);
+
+        props.onClose();
+    }, [student]);
+
 
     return (
         <Dialog isOpen={ props.isVisible } title="Creazione studente"

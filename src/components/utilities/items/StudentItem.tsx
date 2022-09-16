@@ -1,5 +1,5 @@
 import {Student, Teacher} from '../../../domain/Entities';
-import {msToTime} from "../TsFuntions";
+import {msToTime} from "../functions/TsFuntions";
 
 interface Props {
     student: Student;
@@ -24,7 +24,7 @@ export const StudentItem = (props: Props) => {
              className={props.styleType}>
             <div>{props.showCompleteName ? (props.student.name + ' ' + props.student.surname) : props.student.name}</div>
             <div>{date()}</div>
-            <div className="flex flex-row">{props.actions} </div>
+            <div className="flex flex-row">{ props.actions } </div>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import {Grade} from "../../domain/Entities";
+import {Grade} from "../../../domain/Entities";
 
 export function msToTime(ms: number): string {
         const date = new Date(ms)

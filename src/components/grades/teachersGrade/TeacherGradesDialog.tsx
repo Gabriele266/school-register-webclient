@@ -1,6 +1,6 @@
 import {Student, Teacher} from "../../../domain/Entities";
 import {useEffect, useState} from "react";
-import {instance} from "../../StudentsTeachersPage";
+import {instance} from "../../HomePage";
 import {Button, Classes, Dialog, Spinner} from "@blueprintjs/core";
 import {StudentItem} from "../../utilities/items/StudentItem";
 import {DisplayGradesDialog} from "./studentGradesDialog/DisplayGradesDialog";
