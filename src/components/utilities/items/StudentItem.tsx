@@ -5,11 +5,13 @@ interface Props {
     student: Student;
     teacher?: Teacher;
     showOnlyYear?: boolean;
-    actions: JSX.Element[];
+    actions?: JSX.Element[];
     showCompleteName?: boolean;
     background?: string;
     styleType?: string;
     onClick?: () => void;
+    // inserire un booleano per ogni button
+    // e un callback per ogni pulsante
 }
 
 export const StudentItem = (props: Props) => {
@@ -24,7 +26,7 @@ export const StudentItem = (props: Props) => {
              className={props.styleType}>
             <div>{props.showCompleteName ? (props.student.name + ' ' + props.student.surname) : props.student.name}</div>
             <div>{date()}</div>
-            <div className="flex flex-row">{ props.actions } </div>
+            <div>{ props.actions } </div>
         </div>
     );
 };

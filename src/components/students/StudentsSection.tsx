@@ -17,18 +17,24 @@ export const StudentsSection = () => {
 
     useEffect( () => {
         (async () => {
-            //setIsLoading(true);   //TODO bug: rimane true per sempre
+            setIsLoading(true);
 
             const response = await instance.get('/students');
             setStudents(response.data);
 
             setIsLoading(false);
-        })();
-    });
 
-    /*const handleButtonDelete = async () => {  //TODO non riesco a riferirmi ad 'it' dalla onClick
-            await instance.delete(`/students/${ it.id }`);
-    }*/
+            /*
+            setTimeout(async () => {
+                const response = await instance.get('/students');
+                setStudents(response.data);
+
+                setIsLoading(false);
+            }, 1000);
+             */
+        })();
+    }, [setIsLoading, setStudents]);
+
 
     return (
         <div className="flex-1">
@@ -58,8 +64,7 @@ export const StudentsSection = () => {
                                                             </div>]}
                                                             showOnlyYear    //significa true
                                                             showCompleteName
-                                                            styleType="flex justify-between gap-3 w-full bg-blue-400 p-2 text-white"
-                                                            //TODO bug: la griglia da 3 si presenta da 4 spazi con uno vuoto
+                                                            styleType="flex justify-between gap-4 w-full bg-blue-400 p-2 text-white"
                             />)
                         }
                     </div>

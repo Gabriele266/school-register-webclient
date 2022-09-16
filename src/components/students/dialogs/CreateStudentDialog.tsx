@@ -2,11 +2,9 @@ import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprint
 import {useCallback, useState} from 'react';
 import {instance} from "../../HomePage";
 import {timeToMs} from "../../utilities/functions/TsFuntions";
+import {BaseDialogProps} from "./ModifyStudentDialog";
 
-interface Props {
-    isVisible: boolean;
-    onClose: () => void;
-}
+interface Props extends BaseDialogProps { }
 
 export const CreateStudentDialog = (props: Props) => {
     const [name, setName] = useState('');
@@ -16,22 +14,14 @@ export const CreateStudentDialog = (props: Props) => {
     const [email, setEmail] = useState('');
     let [inputDate, setInputDate] = useState("2004-01-13");
 
-    // TODO: Utilizzo di una useCallback
-    const handleButtonAddStudent = async () => {
+
+    const handleButtonAddStudent = useCallback(async () => {
         const student = {name, surname, email, birthDate, tel};
 
         await instance.post(`/students`, student);
 
         props.onClose();
-    }
-
-    const addStudent = useCallback(async (event) => {
-        const student = {name, surname, email, birthDate, tel};
-
-        await instance.post(`/students`, student);
-
-        props.onClose();
-    }, [student]);
+    }, [name, surname, email, birthDate, tel]);
 
 
     return (

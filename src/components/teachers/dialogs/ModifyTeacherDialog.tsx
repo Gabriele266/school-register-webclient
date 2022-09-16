@@ -1,13 +1,12 @@
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from "@blueprintjs/core";
 import {instance} from "../../HomePage";
 import {Teacher} from "../../../domain/Entities";
-import {useState} from "react";
+import {useCallback, useState} from "react";
+import {BaseDialogProps} from "../../students/dialogs/ModifyStudentDialog";
 
-// TODO: Utilizzare un'interfaccia comune per tutte le proprietà 'sempre uguali' dei dialoghi
-interface Props {
+
+interface Props  extends BaseDialogProps {
     teacher: Teacher;
-    isVisible: boolean;
-    onClose: () => void;
     onModify: (teacher: Teacher) => void;
 }
 
@@ -19,14 +18,15 @@ export const ModifyTeacherDialog = (props: Props) => {
     const [address, setAddress] = useState(props.teacher.address);
     const [subject, setSubject] = useState(props.teacher.subject);
 
-    const handleButtonModifyTeacher = async () => {
-        // TODO: onClose lo chiamiamo dopo che abbiamo finito di fare tutto, altrimenti con elaborazioni lunghe rischia di crashare
-        props.onClose();
+    const handleButtonModifyTeacher = useCallback(async () => {
         //console.log(props.teacher.id);  //corretto
         const teacher = { id: props.teacher.id, name, surname, email, tel, address, subject };
-        const response = await instance.put(`/teachers`, teacher);
-        console.log(response.data);
-    }
+
+        await instance.put(`/teachers`, teacher);
+        //console.log(response.data);
+
+        props.onClose();
+    }, [name, surname, email, tel, address, subject]);
 
     return (
         <Dialog isOpen={ props.isVisible } title="Modifica insegnante"

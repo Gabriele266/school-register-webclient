@@ -1,6 +1,6 @@
 import {Student} from '../../../domain/Entities';
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprintjs/core';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {instance} from "../../HomePage";
 import {msToTime, timeToMs} from "../../utilities/functions/TsFuntions";
 
@@ -22,13 +22,13 @@ export const ModifyStudentDialog = (props: Props) => {
     const [email, setEmail] = useState(props.student.email);
     let [inputDate, setInputDate] = useState(msToTime(props.student.birthDate));
 
-    // TODO: Usare useCallback per migliore gestione dello stato
-    const handleButtonModifyStudent = async () => {
-        props.onClose();
+    const handleButtonModifyStudent = useCallback(async () => {
         const student = {id: props.student.id, name, surname, email, birthDate, tel};
 
         await instance.post(`/students/update`, student);
-    }
+
+        props.onClose();
+    }, [name, surname, email, birthDate, tel]);
 
     return (
         <Dialog isOpen={ props.isVisible } title="Modifica studente"

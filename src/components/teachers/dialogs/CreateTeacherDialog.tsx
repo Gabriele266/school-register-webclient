@@ -1,5 +1,5 @@
 import {Button, Classes, Dialog, FormGroup, InputGroup, Intent} from '@blueprintjs/core';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {instance} from "../../HomePage";
 import {BaseDialogProps} from "../../students/dialogs/ModifyStudentDialog";
 
@@ -14,14 +14,14 @@ export const CreateTeacherDialog = (props: Props) => {
     const [address, setAddress] = useState('');
     const [subject, setSubject] = useState('');
 
-    // TODO: Usare useCallback
-    const handleButtonAddTeacher = async () => {
+    const handleButtonAddTeacher = useCallback(async () => {
         const teacher = [{ name, surname, email, tel, address, subject }];  //provare senza lista
-        const response = await instance.post(`/teachers`, teacher);
-        console.log(response.data);
+
+        await instance.post(`/teachers`, teacher);
+        //console.log(response.data);
 
         props.onClose();    // onClose lo chiamiamo dopo che abbiamo finito di fare tutto, altrimenti con elaborazioni lunghe rischia di crashare
-    }
+    }, [name, surname, email, tel, address, subject]);
 
     return (
         <Dialog isOpen={ props.isVisible } title="Creazione insegnante"
