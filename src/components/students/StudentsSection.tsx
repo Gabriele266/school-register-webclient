@@ -15,6 +15,8 @@ export const StudentsSection = () => {
     const [studentGradesVisible, setStudentGradesVisible] = useState(false);
     const [createStudentVisible, setCreateStudentVisible] = useState(false);
 
+    const [selectedStudent, setSelectedStudent] = useState<Student>();
+
     useEffect( () => {
         (async () => {
             setIsLoading(true);
@@ -44,19 +46,14 @@ export const StudentsSection = () => {
                         {
                             students.map(it => <StudentItem student={it}
                                                             actions={[<div>
-                                                                <Button icon="book" onClick={ () => setStudentGradesVisible(true) }/> {
-                                                                studentGradesVisible &&
-                                                                <StudentGradesDialog student={ it }
-                                                                                     isVisible={ studentGradesVisible }
-                                                                                     onClose={ () => setStudentGradesVisible(false) }/>
-                                                            }
-                                                                <Button icon="edit" onClick={ () => setModifyStudentVisible(true) }/> {
-                                                                modifyStudentVisible &&
-                                                                <ModifyStudentDialog student={ it }
-                                                                                     isVisible={ modifyStudentVisible }
-                                                                                     onClose={ () => setModifyStudentVisible(false) }
-                                                                                     onModify={ it => {console.log(it);} }/>
-                                                            }
+                                                                <Button icon="book" onClick={ () => {
+                                                                    setSelectedStudent(it);
+                                                                    setStudentGradesVisible(true)} }/>
+
+                                                                <Button icon="edit" onClick={ () => {
+                                                                    setSelectedStudent(it);
+                                                                    setModifyStudentVisible(true)} }/>
+
                                                                 <Button icon="trash" minimal intent={ Intent.DANGER } onClick={ async () => {
                                                                     await instance.delete(`/students/${ it.id }`);
                                                                 } }/>
@@ -66,6 +63,21 @@ export const StudentsSection = () => {
                                                             showCompleteName
                                                             styleType="flex justify-between gap-4 w-full bg-blue-400 p-2 text-white"
                             />)
+                        }
+
+                        {
+                            studentGradesVisible &&
+                            <StudentGradesDialog student={ selectedStudent as Student }
+                                                 isVisible={ studentGradesVisible }
+                                                 onClose={ () => setStudentGradesVisible(false) }/>
+                        }
+
+                        {
+                            modifyStudentVisible &&
+                            <ModifyStudentDialog student={ selectedStudent as Student }
+                                                 isVisible={ modifyStudentVisible }
+                                                 onClose={ () => setModifyStudentVisible(false) }
+                                                 onModify={ it => {console.log(it);} }/>
                         }
                     </div>
 

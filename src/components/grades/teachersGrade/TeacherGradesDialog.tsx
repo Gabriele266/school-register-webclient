@@ -16,6 +16,7 @@ export const TeacherGradesDialog = (props: Props) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [displayGradesVisible, setDisplayGradesVisible] = useState(false);
+    const [selectedStudent, setSelectedStudent] = useState<Student>();
 
     useEffect( () => {
         const getStudents = async () => {
@@ -45,16 +46,21 @@ export const TeacherGradesDialog = (props: Props) => {
                                                                     teacher={props.teacher}
                                                                     actions={[
                                                                         <div>
-                                                                        <Button icon="eye-open" onClick={ () => setDisplayGradesVisible(true) }/> {
-                                                                        displayGradesVisible &&
-                                                                        <DisplayGradesDialog student={ it }
-                                                                                             subject={ props.teacher.subject }
-                                                                                             isVisible={ displayGradesVisible }
-                                                                                             onClose={ () => setDisplayGradesVisible(false) }/>
-                                                                    }
+                                                                        <Button icon="eye-open" onClick={ () => {
+                                                                            setSelectedStudent(it);
+                                                                            setDisplayGradesVisible(true);
+                                                                        } }/>
+
                                                                     </div>]}
                                                                     styleType="flex justify-between w-full border border-slate-300 hover:border-indigo-300 p-2 text-black"
                                     />)
+                                }
+                                {
+                                    displayGradesVisible &&
+                                    <DisplayGradesDialog student={ selectedStudent as Student }
+                                                         subject={ props.teacher.subject }
+                                                         isVisible={ displayGradesVisible }
+                                                         onClose={ () => setDisplayGradesVisible(false) }/>
                                 }
                             </div>
                     }

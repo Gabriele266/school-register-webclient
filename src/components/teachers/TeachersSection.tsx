@@ -15,6 +15,8 @@ export const TeachersSection = () => {
     const [teacherGradesVisible, setTeacherGradesVisible] = useState(false);
     const [modifyTeacherVisible, setModifyTeacherVisible] = useState(false);
 
+    const [selectedTeacher, setSelectedTeacher] = useState<Teacher>();
+
     useEffect( () => {
         (async () => {
             setIsLoading(true);
@@ -35,27 +37,35 @@ export const TeachersSection = () => {
                         {
                             teachers.map(it => <TeacherItem teacher={ it }
                                                             actions={[<div>
-                                                                <Button icon="book" onClick={ () => setTeacherGradesVisible(true) }/> {
-                                                                teacherGradesVisible &&
-                                                                <TeacherGradesDialog teacher={ it }
-                                                                                     isVisible={ teacherGradesVisible }
-                                                                                     onClose={ () => setTeacherGradesVisible(false) }/>
-                                                            }
+                                                                <Button icon="book" onClick={ () => {
+                                                                    setSelectedTeacher(it);
+                                                                    setTeacherGradesVisible(true) } }/>
 
-                                                                <Button icon="edit" onClick={ () => setModifyTeacherVisible(true) }/>
-                                                                {
-                                                                    setModifyTeacherVisible &&
-                                                                    <ModifyTeacherDialog teacher={ it }
-                                                                                         isVisible={ modifyTeacherVisible }
-                                                                                         onClose={ () => setModifyTeacherVisible(false) }
-                                                                                         onModify={ it => {console.log(it);} }/>
-                                                                }
+                                                                <Button icon="edit" onClick={ () => {
+                                                                    setSelectedTeacher(it);
+                                                                    setModifyTeacherVisible(true);
+                                                                } }/>
 
                                                                 <Button icon="trash" minimal intent={ Intent.DANGER } onClick={ async () => {
                                                                     await instance.delete(`/teachers/${ it.id }`);
                                                                 } }/>
                                                             </div> ]}
                             />)
+                        }
+
+                        {
+                            teacherGradesVisible &&
+                            <TeacherGradesDialog teacher={ selectedTeacher as Teacher }
+                                                 isVisible={ teacherGradesVisible }
+                                                 onClose={ () => setTeacherGradesVisible(false) }/>
+                        }
+
+                        {
+                            modifyTeacherVisible &&
+                            <ModifyTeacherDialog teacher={ selectedTeacher as Teacher }
+                                                 isVisible={ modifyTeacherVisible }
+                                                 onClose={ () => setModifyTeacherVisible(false) }
+                                                 onModify={ it => {console.log(it);} }/>
                         }
                     </div>
             }
