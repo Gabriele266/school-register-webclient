@@ -1,4 +1,4 @@
-import {Button, Classes, Dialog, Spinner} from "@blueprintjs/core";
+import {Classes, Dialog, Spinner} from "@blueprintjs/core";
 import {useEffect, useState} from "react";
 import {instance} from "../../HomePage";
 import {Grade, Student} from "../../../domain/Entities";
@@ -13,34 +13,37 @@ interface Props {
 export const StudentGradesDialog = (props: Props) => {
     const [grades, setGrades] = useState<Grade[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    
+
     useEffect( () => {
-        const getStudentGrades = async () => {
+        (async () => {
+            setIsLoading(true);
+
             const response = await instance.get(`/students/${ props.student.id }/grades`);
-            console.log(response.data);
-
             setGrades(response.data);
+
             setIsLoading(false);
-
-            return response;
-        }
-        getStudentGrades();
-
-        setIsLoading(true);
+        })();
+    }, [setIsLoading, setGrades]);
 
 
-    }, [setGrades, setIsLoading]);
-
-    //se non ci sono ancora voti scriverlo
-    
     return(
         <Dialog isOpen={ props.isVisible } title="Visualizzazione voti"
-                onClose={ props.onClose } className="h-69 w-69">
+                onClose={ props.onClose } className="min-h-min min-w-min">
             <div className={ Classes.DIALOG_BODY }>
                 <div className="flex-1">
                     {
                         isLoading ? <Spinner/> :
-                            <div>
+                            <GradeItem grades={ grades }
+                                       showSubject
+                                />
+                    }
+                </div>
+            </div>
+        </Dialog>
+    )
+    
+}
+/*
                                 <div className="grid grid-cols-4 gap-2 p-2">
                                     <div>Materia</div>
                                     <div>Voto</div>
@@ -54,11 +57,4 @@ export const StudentGradesDialog = (props: Props) => {
                                                                       styleType="grid grid-cols-4 gap-2 p-2 text-black"
                                     />)
                                 }
-                            </div>
-                    }
-                </div>
-            </div>
-        </Dialog>
-    )
-    
-}
+ */
