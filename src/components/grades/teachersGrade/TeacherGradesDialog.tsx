@@ -22,6 +22,7 @@ export const TeacherGradesDialog = (props: Props) => {
         const getStudents = async () => {
             const response = await instance.get(`/students`);
             setStudents(response.data);
+            console.log(props.teacher)
 
             setIsLoading(false);
             return response;
