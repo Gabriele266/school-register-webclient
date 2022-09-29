@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 import {Grade, Student} from "../../../../domain/Entities";
 import {Classes, Dialog, Spinner} from "@blueprintjs/core";
 import {instance} from "../../../HomePage";
-import {getSubjectGrades} from "../../../utilities/functions/TsFuntions";
-import {GradeItem} from "../../../utilities/items/GradeItem";
+import {getSubjectGrades, msToTime} from "../../../utilities/functions/TsFuntions";
+import {Cell, Column, Table2} from "@blueprintjs/table";
 
 interface Props {
     student: Student;
@@ -36,6 +36,16 @@ export const DisplayGradesDialog = (props: Props) => {
     }, [setGrades, setIsLoading]);
 
 
+    const valueColumn = (index: number) => {
+        return <Cell>{grades[index].value}</Cell>
+    }
+    const dateColumn = (index: number) => {
+        return <Cell>{msToTime(grades[index].dateTime)}</Cell>
+    }
+    const descriptionColumn = (index: number) => {
+        return <Cell>{grades[index].description}</Cell>
+    }
+
     //se non ci sono ancora voti scriverlo
 
     return(
@@ -45,8 +55,11 @@ export const DisplayGradesDialog = (props: Props) => {
                 <div className="flex-1">
                     {
                         isLoading ? <Spinner/> :
-                            <GradeItem grades={ grades }
-                            />
+                            <Table2 numRows={grades.length}>
+                                <Column name="Voto" cellRenderer={valueColumn}/>
+                                <Column name="Data" cellRenderer={dateColumn}/>
+                                <Column name="Descrizione" cellRenderer={descriptionColumn}/>
+                            </Table2>
                     }
                 </div>
 
