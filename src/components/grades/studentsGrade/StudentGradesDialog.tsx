@@ -1,5 +1,5 @@
 import {Classes, Dialog, MenuItem, Spinner} from "@blueprintjs/core";
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {instance} from "../../HomePage";
 import {Grade, Student} from "../../../domain/Entities";
 import {msToTime} from "../../utilities/functions/TsFuntions";
@@ -18,7 +18,7 @@ export const StudentGradesDialog = (props: Props) => {
 
     const [grades, setGrades] = useState<Grade[]>([]);
     const [subjects, setSubjects] = useState<string[]>([]);
-    const [menuName, setMenuName] = useState("Materia");
+    const [menuName, setMenuName] = useState("Mostra per materia");
     const [data, setData] = useState<Grade[]>([]);
 
     useEffect(() => {
@@ -98,25 +98,24 @@ export const StudentGradesDialog = (props: Props) => {
             <div className={Classes.DIALOG_BODY}>
                 <nav className="button-group pb-3 flex justify-between">
                     <div>
+                        <button
+                            onClick={() => {
+                                setData(grades)
+                                setMenuName("Mostra per materia");
+                            }} className="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg rounded-r-md border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700">
+                            Tutti i voti
+                        </button>
+                    </div>
+                    <div>
                         <SubjectsSelect items={ subjects }
                                         itemRenderer={renderSubjects}
                                         noResults={<MenuItem disabled={true} text="No results."  roleStructure="listoption" />}
                                         onItemSelect={handleValueChange}>
                             <button
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                className="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg rounded-r-md border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700">
                                 { menuName }
                             </button>
                         </SubjectsSelect>
-                    </div>
-                    <div>
-                        <button
-                                className="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700">
-                            Crescente
-                        </button>
-                        <button
-                                className="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700">
-                            Decrescente
-                        </button>
                     </div>
                 </nav>
 
