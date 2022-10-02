@@ -3,7 +3,7 @@ import {Grade, Student} from "../../../../domain/Entities";
 import {Classes, Dialog, Spinner} from "@blueprintjs/core";
 import {instance} from "../../../HomePage";
 import {getSubjectGrades, msToTime} from "../../../utilities/functions/TsFuntions";
-import {Cell, Column, Table2} from "@blueprintjs/table";
+import DataTable from "react-data-table-component";
 
 interface Props {
     student: Student;
@@ -18,33 +18,32 @@ export const DisplayGradesDialog = (props: Props) => {
 
     useEffect( () => {
         //viene eseguito ogni volta che si preme il bottone 'occhio' sullo student
-        const getStudentGradesBySubject = async () => {
-            const response = await instance.get(`/students/${ props.student.id }/grades`);
+        (async () => {
+            setIsLoading(true);
 
-            //se metto const non funziona
-            let gradesList = getSubjectGrades(response.data, props.subject);
-            //console.log(gradesList)
-            setGrades(gradesList);
+            const response = await instance.get(`/students/${ props.student.id }/grades`);
+            setGrades(getSubjectGrades(response.data, props.subject));
 
             setIsLoading(false);
-            return response;
+        })();
+    }, [setIsLoading, setGrades]);
+
+
+        const columns = [
+        {
+            name: 'Voto',
+            selector: (row: any) => row.value,
+            sortable: true
+        },
+        {
+            name: 'Data',
+            selector: (row: any) => msToTime(row.dateTime)
+        },
+        {
+            name: 'Descrizione',
+            selector: (row: any) => row.description
         }
-        getStudentGradesBySubject();
-
-        setIsLoading(true);
-
-    }, [setGrades, setIsLoading]);
-
-
-    const valueColumn = (index: number) => {
-        return <Cell>{grades[index].value}</Cell>
-    }
-    const dateColumn = (index: number) => {
-        return <Cell>{msToTime(grades[index].dateTime)}</Cell>
-    }
-    const descriptionColumn = (index: number) => {
-        return <Cell>{grades[index].description}</Cell>
-    }
+    ];
 
     //se non ci sono ancora voti scriverlo
 
@@ -55,11 +54,10 @@ export const DisplayGradesDialog = (props: Props) => {
                 <div className="flex-1">
                     {
                         isLoading ? <Spinner/> :
-                            <Table2 numRows={grades.length}>
-                                <Column name="Voto" cellRenderer={valueColumn}/>
-                                <Column name="Data" cellRenderer={dateColumn}/>
-                                <Column name="Descrizione" cellRenderer={descriptionColumn}/>
-                            </Table2>
+                            <DataTable
+                                columns={columns}
+                                data={grades}
+                            />
                     }
                 </div>
 
@@ -68,8 +66,3 @@ export const DisplayGradesDialog = (props: Props) => {
     )
 
 }
-/*
-<div className="flex-1">
-                    <div>{props.grades[0].value}</div>
-                </div>
- */
